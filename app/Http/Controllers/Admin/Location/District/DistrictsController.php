@@ -71,4 +71,10 @@ class DistrictsController extends Controller
         }
         return redirect()->route('districts.index');
     }
+
+    public function getDistrict(Request $request)
+    {
+        $division_id = $request->id;
+        return District::where('division_id', $division_id)->get()->toArray();
+    }
 }

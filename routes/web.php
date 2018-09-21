@@ -1,4 +1,5 @@
 <?php
+use App\Models\Admin\Place;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,9 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
     // Place Location
     Route::resource('divisions', 'Admin\Location\Division\DivisionsController');
     Route::resource('districts', 'Admin\Location\District\DistrictsController');
+
+    Route::post('getDistrict', 'Admin\Location\District\DistrictsController@getDistrict')->name('getDistrict');
+    // Place
+    Route::resource('places', 'Admin\Place\PlacesController');
+
 });

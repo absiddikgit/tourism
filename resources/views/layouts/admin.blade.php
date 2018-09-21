@@ -22,7 +22,7 @@
 
 
     <!-- Bootstrap Select Css -->
-    <link href="{!! asset('admin/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet" />
+    {{-- <link href="{!! asset('admin/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet" /> --}}
 
     <!-- Waves Effect Css -->
     <link href="{!! asset('admin/plugins/node-waves/waves.css') !!}" rel="stylesheet" />
@@ -141,6 +141,12 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="">
+                        <a href="{!! route('places.create') !!}">
+                            <i class="material-icons">place</i>
+                            <span>Place</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="">
                             <i class="material-icons">text_fields</i>
@@ -247,14 +253,41 @@
     <!-- Bootstrap Core Js -->
     <script src="{!! asset('admin/plugins/bootstrap/js/bootstrap.js') !!}"></script>
 
-    <!-- Select Plugin Js -->
-    <script src="{!! asset('admin/plugins/bootstrap-select/js/bootstrap-select.js') !!}"></script>
-
     <!-- Slimscroll Plugin Js -->
     <script src="{!! asset('admin/plugins/jquery-slimscroll/jquery.slimscroll.js') !!}"></script>
 
     <!-- Waves Effect Plugin Js -->
     <script src="{!! asset('admin/plugins/node-waves/waves.js') !!}"></script>
+
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="{!! asset('admin/plugins/jquery-datatable/jquery.dataTables.js') !!}"></script>
+    <script src="{!! asset('admin/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') !!}"></script>
+    <script src="{!! asset('admin/plugins/jquery-datatable/extensions/export/buttons.print.min.js') !!}"></script>
+
+    <!-- Custom Js -->
+    <script src="{!! asset('admin/js/admin.js') !!}"></script>
+    <script src="{!! asset('admin/js/pages/tables/jquery-datatable.js') !!}"></script>
+
+    {{-- editors --}}
+    <script src="{!! asset('admin/plugins/ckeditor/ckeditor.js') !!}"></script>
+    <script src="{!! asset('admin/js/pages/forms/editors.js') !!}"></script>
+
+    <!-- Demo Js -->
+    <script src="{!! asset('admin/js/demo.js') !!}"></script>
+
+    <!-- toastr -->
+    <script type="text/javascript" src="{{asset('js/toastr.min.js')}}"></script>
+    <!-- END TEMPLATE -->
+    <script type="text/javascript">
+        @if (Session::has('success'))
+            toastr.success("{{Session::get('success')}}")
+        @endif
+        @if (Session::has('info'))
+            toastr.info("{{Session::get('info')}}")
+        @endif
+    </script>
+    @yield('scripts')
+
 
     <!-- Jquery CountTo Plugin Js -->
     {{-- <script src="{!! asset('admin/plugins/jquery-countto/jquery.countTo.js') !!}"></script> --}}
@@ -276,31 +309,11 @@
     <!-- Sparkline Chart Plugin Js -->
     {{-- <script src="{!! asset('admin/plugins/jquery-sparkline/jquery.sparkline.js') !!}"></script> --}}
 
-    <!-- Jquery DataTable Plugin Js -->
-    <script src="{!! asset('admin/plugins/jquery-datatable/jquery.dataTables.js') !!}"></script>
-    <script src="{!! asset('admin/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') !!}"></script>
-    <script src="{!! asset('admin/plugins/jquery-datatable/extensions/export/buttons.print.min.js') !!}"></script>
 
-    <!-- Custom Js -->
-    <script src="{!! asset('admin/js/admin.js') !!}"></script>
     {{-- <script src="{!! asset('admin/js/pages/index.js') !!}"></script> --}}
-    <script src="{!! asset('admin/js/pages/tables/jquery-datatable.js') !!}"></script>
 
-    <!-- Demo Js -->
-    <script src="{!! asset('admin/js/demo.js') !!}"></script>
-
-    <!-- toastr -->
-    <script type="text/javascript" src="{{asset('js/toastr.min.js')}}"></script>
-    <!-- END TEMPLATE -->
-    <script type="text/javascript">
-        @if (Session::has('success'))
-            toastr.success("{{Session::get('success')}}")
-        @endif
-        @if (Session::has('info'))
-            toastr.info("{{Session::get('info')}}")
-        @endif
-    </script>
-    @yield('scripts')
+    <!-- Select Plugin Js -->
+    {{-- <script src="{!! asset('admin/plugins/bootstrap-select/js/bootstrap-select.js') !!}"></script> --}}
 </body>
 
 </html>

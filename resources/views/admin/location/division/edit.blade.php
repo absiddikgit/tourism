@@ -36,20 +36,3 @@
         </div>
     </div>
 @endsection
-@section('scripts')
-    <script>
-        $('#is_admin').change(function(){
-            if($(this). prop("checked") == true){
-                $('#dept').prop('disabled',true);
-            }
-            if($(this). prop("checked") == false){
-                $('#dept').prop('disabled',false);
-            }
-        });
-        $(document).ready(function(){
-            if($('#is_admin').is(':checked')){
-                $('#dept').prop('disabled',true);
-            }
-        });
-    </script>
-@endsection
