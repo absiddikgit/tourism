@@ -9,30 +9,43 @@
                 </div>
                 <div class="body">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a>Details</a></li>
-                        <li><a href="{!! route('place.location.edit',$p->id) !!}">Location</a></li>
+                        <li><a href="{!! route('places.edit',$p->id) !!}">Details</a></li>
+                        <li class="active"><a>Location</a></li>
                         <li><a href="{!! route('place.images.edit',$p->id) !!}">Images</a></li>
                     </ul>
 
                     <div class="tab-content">
                         <div id="home" class="tab-pane fade in active">
-                            {!! Form::model($p,['route'=>['places.update',$p->id],'method'=>'put','class'=>'form-horizontal','enctype'=> 'multipart/form-data']) !!}
+                            {!! Form::model($p,['route'=>['place.location.update',$p->id],'method'=>'put','class'=>'form-horizontal','enctype'=> 'multipart/form-data']) !!}
                             @include('includes.errors')
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Title</label>
+                                <label class="col-sm-3 control-label">Division</label>
                                 <div class="col-sm-8">
-                                    <div class="form-line">
-                                        {!! Form::text('title', null, ['class'=>'form-control','required'=>'']) !!}
+                                    <div style="margin-bottom:3px;" class="form-line">
+                                        {!! Form::select('division', [''=>'choose']+$divisions, 0,
+                                            ['class'=>'form-control','onChange'=>"get_district(this.value);"]) !!}
                                     </div>
+                                    <i><small>Previous Division: {{ $p->division->name }}</small></i>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Description</label>
+                                <label class="col-sm-3 control-label">District</label>
+                                <div class="col-sm-8">
+                                    <div style="margin-bottom:3px;" class="form-line">
+                                        <select class="form-control" name="district" id="district">
+                                            <option value="">Choose</option>
+                                        </select>
+                                    </div>
+                                    <i><small>Previous District: {{ $p->district->name }}</small></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Location</label>
                                 <div class="col-sm-8">
                                     <div class="form-line">
-                                        {!! Form::textarea('description', null, ['class'=>'form-control','required'=>'','id'=>"ckeditor"]) !!}
+                                        {!! Form::text('location', null, ['class'=>'form-control','required'=>'']) !!}
                                     </div>
                                 </div>
                             </div>

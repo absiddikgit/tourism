@@ -142,7 +142,7 @@
                         </ul>
                     </li>
                     <li class="">
-                        <a href="{!! route('places.create') !!}">
+                        <a href="{!! route('places.index') !!}">
                             <i class="material-icons">place</i>
                             <span>Place</span>
                         </a>

@@ -5,10 +5,10 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
-                    <h2>Update Division</h2>
+                    <h2>Create Place</h2>
                 </div>
                 <div class="body">
-                    {!! Form::open(['route'=>'places.store','method'=>'post','class'=>'form-horizontal']) !!}
+                    {!! Form::open(['route'=>'places.store','method'=>'post','class'=>'form-horizontal','enctype'=> 'multipart/form-data']) !!}
                     @include('includes.errors')
 
                     <div class="form-group">

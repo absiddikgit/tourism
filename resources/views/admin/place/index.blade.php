@@ -2,42 +2,15 @@
 
 @section('content')
     <div class="row clearfix">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card">
                 <div class="header">
-                    <h2>Create Division</h2>
-                </div>
-                <div class="body">
-                    {{Form::open(['route'=>'divisions.store','method'=>'post','class'=>'form-horizontal'])}}
-                    @include('includes.errors')
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Division</label>
-                        <div class="col-sm-6">
-                            <div class="form-line">
-                                {{Form::text('division',null,['class'=>'form-control','required'=>'','placeholder'=>'Division name'])}}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label"></label>
-                        <div class="col-sm-6">
-                            <div class="pull-right">
-                                {{Form::submit('Save',['class'=>'btn btn-success'])}}
-                                <input class="btn btn-danger" type="reset" value="Reset">
-                            </div>
-                        </div>
-                    </div>
-
-                    {{Form::close()}}
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="header">
-                    <h2>Division</h2>
+                    <h2>Place</h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a class="btn btn-primary" href="{!! route('places.create') !!}">+ Add New</a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="body">
                     <div class="">
@@ -45,6 +18,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>District Name</th>
                                     <th>Division Name</th>
                                     <th>Action</th>
                                 </tr>
@@ -53,16 +29,24 @@
                             $i = 1
                             @endphp
                             <tbody>
-                                @if ($divisions->count())
-                                    @foreach ($divisions as $d)
+                                @if ($places->count())
+                                    @foreach ($places as $p)
                                         <tr>
                                             <td>{{ $i++ }}</td>
-                                            <td>{{ $d->name }}</td>
                                             <td>
-                                                <a class="btn btn-sm btn-primary" href="{{route('divisions.edit', $d->id)}}"> Edit</a>
-                                                <a class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#{{ $d->id }}">Delete</a>
+                                                @if ($p->placeImages->count())
+                                                    <img width="70px" height="35px" src="{{ $p->placeImages[0]->image }}" alt="">
+                                                @endif
+                                            </td>
+                                            <td>{{ $p->title }}</td>
+                                            <td>{{ $p->district->name }}</td>
+                                            <td>{{ $p->division->name }}</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info" href="{{route('places.show', $p->id)}}"> view</a>
+                                                <a class="btn btn-sm btn-primary" href="{{route('places.edit', $p->id)}}"> Edit</a>
+                                                <a class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#{{ $p->id }}">Delete</a>
 
-                                                <form action="{{ route('divisions.destroy', $d->id) }}" method="post">
+                                                <form action="{{ route('places.destroy', $p->id) }}" method="post">
                                                     {{ csrf_field() }} {{ method_field('delete') }}
 
 
@@ -75,17 +59,13 @@
 
 
                                                     {{-- -------------------- delete Pop Up ---------------------------  --}}
-                                                    <div class="modal fade" id="{{ $d->id }}" role="dialog">
+                                                    <div class="modal fade" id="{{ $p->id }}" role="dialog">
                                                         @include('includes.delete')
                                                     </div>
                                                 </form>
                                             </td>
                                         </tr>
                                     @endforeach
-                                @else
-                                    <tr>
-                                        <td></td>
-                                    </tr>
                                 @endif
                             </tbody>
                         </table>
