@@ -1,6 +1,4 @@
 <?php
-use App\Models\Admin\Place;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,8 +28,8 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
     //Location
     Route::resource('divisions', 'Admin\Location\Division\DivisionsController');
     Route::resource('districts', 'Admin\Location\District\DistrictsController');
-
     Route::post('getDistrict', 'Admin\Location\District\DistrictsController@getDistrict')->name('getDistrict');
+
     // Place
     Route::resource('places', 'Admin\Place\PlacesController');
     // Place Image
@@ -42,5 +40,16 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
     // Place Location
     Route::get('places/location/{id}/edit', 'Admin\Place\PlacesController@edit_location')->name('place.location.edit');
     Route::put('places/location/{id}/update', 'Admin\Place\PlacesController@update_location')->name('place.location.update');
+
+    // Hotel
+    Route::resource('hotels', 'Admin\Hotel\HotelsController');
+    // Hotel Image
+    Route::get('hotels/image/{id}/edit', 'Admin\Hotel\HotelsController@edit_image')->name('hotel.images.edit');
+    Route::post('hotels/image/{id}/update', 'Admin\Hotel\HotelsController@update_image')->name('hotel.images.update');
+    Route::delete('hotels/image/{id}/delete', 'Admin\Hotel\HotelsController@destroy_image')->name('hotel.images.delete');
+
+    // Hotel Location
+    Route::get('hotels/location/{id}/edit', 'Admin\Hotel\HotelsController@edit_location')->name('hotel.location.edit');
+    Route::put('hotels/location/{id}/update', 'Admin\Hotel\HotelsController@update_location')->name('hotel.location.update');
 
 });

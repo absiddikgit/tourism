@@ -147,6 +147,12 @@
                             <span>Place</span>
                         </a>
                     </li>
+                    <li class="">
+                        <a href="{!! route('hotels.index') !!}">
+                            <i class="material-icons">hotel</i>
+                            <span>Hotel</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="">
                             <i class="material-icons">text_fields</i>
