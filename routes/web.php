@@ -52,4 +52,6 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
     Route::get('hotels/location/{id}/edit', 'Admin\Hotel\HotelsController@edit_location')->name('hotel.location.edit');
     Route::put('hotels/location/{id}/update', 'Admin\Hotel\HotelsController@update_location')->name('hotel.location.update');
 
+    // Package Type
+    Route::resource('package-types', 'Admin\Package\PackageTypesController');
 });

@@ -154,6 +154,20 @@
                         </a>
                     </li>
                     <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">map</i>
+                            <span>Package</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{!! route('package-types.index') !!}">Package Type</a>
+                            </li>
+                            <li>
+                                <a href="{!! route('districts.index') !!}">District</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="">
                             <i class="material-icons">text_fields</i>
                             <span>Typography</span>
