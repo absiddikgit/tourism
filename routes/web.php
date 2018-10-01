@@ -28,7 +28,6 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
     //Location
     Route::resource('divisions', 'Admin\Location\Division\DivisionsController');
     Route::resource('districts', 'Admin\Location\District\DistrictsController');
-    Route::post('getDistrict', 'Admin\Location\District\DistrictsController@getDistrict')->name('getDistrict');
 
     // Place
     Route::resource('places', 'Admin\Place\PlacesController');
@@ -54,4 +53,10 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
 
     // Package Type
     Route::resource('package-types', 'Admin\Package\PackageTypesController');
+    Route::resource('packages', 'Admin\Package\PackagesController');
+
+    // get data by ajax
+    Route::post('getDistricts', 'Admin\Location\District\DistrictsController@getDistrict')->name('getDistrict');
+    Route::post('getPlaces', 'Admin\Place\PlacesController@getPlace')->name('getPlace');
+    Route::post('getHotels', 'Admin\Hotel\HotelsController@getHotel')->name('getHotel');
 });

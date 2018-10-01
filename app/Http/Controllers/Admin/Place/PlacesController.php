@@ -242,4 +242,13 @@ class PlacesController extends Controller
         }
         return redirect()->back();
     }
+
+    public function getPlace(Request $r)
+    {
+        $division_id = $r->division_id;
+        $district_id = $r->district_id;
+
+        return $places = Place::where('division_id',$division_id)->where('district_id',$district_id)->with('placeImages')->get()->toArray();
+
+    }
 }

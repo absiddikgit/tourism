@@ -242,4 +242,13 @@ class HotelsController extends Controller
         }
         return redirect()->back();
     }
+
+    public function getHotel(Request $r)
+    {
+        $division_id = $r->division_id;
+        $district_id = $r->district_id;
+
+        return $places = Hotel::where('division_id',$division_id)->where('district_id',$district_id)->with('hotelImages')->get()->toArray();
+
+    }
 }

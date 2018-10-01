@@ -30,6 +30,9 @@
     <!-- Animation Css -->
     <link href="{!! asset('admin/plugins/animate-css/animate.css') !!}" rel="stylesheet" />
 
+    <!-- Sweet Alert Css -->
+    <link href="{!! asset('admin/plugins/sweetalert/sweetalert.css') !!}" rel="stylesheet" />
+
     <!-- JQuery DataTable Css -->
     <link href="{!! asset('admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') !!}" rel="stylesheet">
 
@@ -44,6 +47,9 @@
 
     <!-- toastr -->
     <link rel="stylesheet" type="text/css" id="theme" href="{{asset('css/toastr.min.css')}}"/>
+
+    {{-- Datepicker --}}
+    <link href="{!! asset('datepicker/datepicker.css') !!}" rel="stylesheet" />
 
     {{-- this style used for borderless table
     --       no need to change this
@@ -163,7 +169,7 @@
                                 <a href="{!! route('package-types.index') !!}">Package Type</a>
                             </li>
                             <li>
-                                <a href="{!! route('districts.index') !!}">District</a>
+                                <a href="{!! route('packages.create') !!}">Package</a>
                             </li>
                         </ul>
                     </li>
@@ -248,10 +254,7 @@
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                    &copy; 2016 - 2017 <a href="javascript:void(0);">{{ config('app.name') }}</a>.
-                </div>
-                <div class="version">
-                    <b>Version: </b> 1.0.5
+                    &copy; {{ date('Y') }} <a href="javascript:void(0);">{{ config('app.name') }}</a>.
                 </div>
             </div>
             <!-- #Footer -->
@@ -279,6 +282,18 @@
     <!-- Waves Effect Plugin Js -->
     <script src="{!! asset('admin/plugins/node-waves/waves.js') !!}"></script>
 
+    <!-- Jquery Validation Plugin Css -->
+    <script src="{!! asset('admin/plugins/jquery-validation/jquery.validate.js') !!}"></script>
+
+    <!-- JQuery Steps Plugin Js -->
+    <script src="{!! asset('admin/plugins/jquery-steps/jquery.steps.js') !!}"></script>
+
+    <!-- Sweet Alert Plugin Js -->
+    <script src="{!! asset('admin/plugins/sweetalert/sweetalert.min.js') !!}"></script>
+
+    <!-- Custom Js -->
+    <script src="{!! asset('admin/js/pages/forms/form-wizard.js') !!}"></script>
+
     <!-- Jquery DataTable Plugin Js -->
     <script src="{!! asset('admin/plugins/jquery-datatable/jquery.dataTables.js') !!}"></script>
     <script src="{!! asset('admin/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') !!}"></script>
@@ -288,16 +303,23 @@
     <script src="{!! asset('admin/js/admin.js') !!}"></script>
     <script src="{!! asset('admin/js/pages/tables/jquery-datatable.js') !!}"></script>
 
-    {{-- editors --}}
-    <script src="{!! asset('admin/plugins/ckeditor/ckeditor.js') !!}"></script>
-    <script src="{!! asset('admin/js/pages/forms/editors.js') !!}"></script>
-
     <!-- Demo Js -->
     <script src="{!! asset('admin/js/demo.js') !!}"></script>
 
+    <!-- Datepicker -->
+    <script src="{!! asset('datepicker/datepicker.js') !!}"></script>
+    <script>
+        $(function() {
+            $('[data-toggle="datepicker"]').datepicker({
+                autoHide: true,
+                format: 'dd-mm-yyyy',
+                zIndex: 2048,
+            });
+        });
+    </script>
+
     <!-- toastr -->
     <script type="text/javascript" src="{{asset('js/toastr.min.js')}}"></script>
-    <!-- END TEMPLATE -->
     <script type="text/javascript">
         @if (Session::has('success'))
             toastr.success("{{Session::get('success')}}")
@@ -306,6 +328,11 @@
             toastr.info("{{Session::get('info')}}")
         @endif
     </script>
+
+    {{-- editors --}}
+    <script src="{!! asset('admin/plugins/ckeditor/ckeditor.js') !!}"></script>
+    <script src="{!! asset('admin/js/pages/forms/editors.js') !!}"></script>
+
     @yield('scripts')
 
 
