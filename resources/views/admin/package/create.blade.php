@@ -49,7 +49,16 @@
 
                         <h3>Details</h3>
                         <fieldset>
+
                             <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Package Title</label>
+                                    <div class="col-sm-6">
+                                        <div class="form-line">
+                                            {!! Form::text('title', null, ['class'=>'form-control','required'=>'','placeholder'=>'Title']) !!}
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Departs</label>
                                     <div class="col-sm-6">
@@ -153,7 +162,11 @@
     @include('includes.ajaxScript.package')
     <script>
         function cost_available(value) {
-            $('#cost_'+value).removeAttr('disabled');
+            if ($('#'+value).is(":checked")) {
+                $('#cost_'+value).removeAttr('disabled');
+            }else {
+                $('#cost_'+value).prop('disabled',true);
+            }
         }
     </script>
 @endsection

@@ -31,4 +31,12 @@ class Hotel extends Model
     {
         return $this->hasMany(HotelImage::class);
     }
+
+    /**
+     * The Package that belong to the model.
+     */
+    public function packages()
+    {
+        return $this->belongsToMany('App\Models\Admin\Package\Package');
+    }
 }

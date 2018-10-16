@@ -4,10 +4,10 @@
     <div class="row clearfix">
         <div class="card">
             <div class="header">
-                <h2>Package Type</h2>
+                <h2>Package</h2>
                 <ul class="header-dropdown m-r--5">
                     <li class="dropdown">
-                        <a class="btn btn-primary" href="{!! route('package-types.create') !!}">+ Add New</a>
+                        <a class="btn btn-primary" href="{!! route('packages.create') !!}">+ Add New</a>
                     </li>
                 </ul>
             </div>
@@ -17,7 +17,13 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Type</th>
+                                <th>Title</th>
+                                <th>Division</th>
+                                <th>District</th>
+                                <th>Departs Date</th>
+                                <th>Return Date</th>
+                                <th>Deadline Date</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -25,16 +31,22 @@
                         $i = 1
                         @endphp
                         <tbody>
-                            @if ($package_types->count())
-                                @foreach ($package_types as $pt)
+                            @if ($packages->count())
+                                @foreach ($packages as $p)
                                     <tr>
                                         <td>{{ $i++ }}</td>
-                                        <td>{{ $pt->type }}</td>
+                                        <td>{{ $p->title }}</td>
+                                        <td>{{ $p->division->name }}</td>
+                                        <td>{{ $p->district->name }}</td>
+                                        <td>{{ $p->departs_date }}</td>
+                                        <td>{{ $p->return_date }}</td>
+                                        <td>{{ $p->booking_deadline }}</td>
+                                        <td>{{ $p->status }}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-primary" href="{{route('package-types.edit', $pt->id)}}"> Edit</a>
-                                            <a class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#{{ $pt->id }}">Delete</a>
+                                            <a class="btn btn-sm btn-info" href="{{route('packages.show', $p->id)}}"> Show</a>
+                                            <a class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#{{ $p->id }}">Delete</a>
 
-                                            <form action="{{ route('package-types.destroy', $pt->id) }}" method="post">
+                                            <form action="{{ route('packages.destroy', $p->id) }}" method="post">
                                                 {{ csrf_field() }} {{ method_field('delete') }}
 
 
@@ -47,17 +59,13 @@
 
 
                                                 {{-- -------------------- delete Pop Up ---------------------------  --}}
-                                                <div class="modal fade" id="{{ $pt->id }}" role="dialog">
+                                                <div class="modal fade" id="{{ $p->id }}" role="dialog">
                                                     @include('includes.delete')
                                                 </div>
                                             </form>
                                         </td>
                                     </tr>
                                 @endforeach
-                            @else
-                                <tr>
-                                    <td></td>
-                                </tr>
                             @endif
                         </tbody>
                     </table>

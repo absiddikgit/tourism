@@ -31,4 +31,12 @@ class Place extends Model
     {
         return $this->hasMany(PlaceImage::class);
     }
+
+    /**
+     * The Package that belong to the model.
+     */
+    public function packages()
+    {
+        return $this->belongsToMany('App\Models\Admin\Package\Package');
+    }
 }

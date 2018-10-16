@@ -169,7 +169,7 @@
                                 <a href="{!! route('package-types.index') !!}">Package Type</a>
                             </li>
                             <li>
-                                <a href="{!! route('packages.create') !!}">Package</a>
+                                <a href="{!! route('packages.index') !!}">Package</a>
                             </li>
                         </ul>
                     </li>
