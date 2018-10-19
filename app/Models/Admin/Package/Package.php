@@ -9,7 +9,7 @@ class Package extends Model
 {
     const STATUS = [''=>'Choose','1'=>'Active','0'=>'Deactive'];
 
-    protected $fillable = ['title','slug','division_id','district_id','departs_date','return_date','booking_deadline','status'];
+    protected $fillable = ['title','slug','division_id','district_id','description','departs_date','return_date','booking_deadline','status'];
 
     /**
      * Get the Division that owns the model.

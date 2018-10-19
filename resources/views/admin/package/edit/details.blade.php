@@ -20,6 +20,14 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">Description</label>
+                            <div class="col-sm-8">
+                                <div class="form-line">
+                                    {!! Form::textarea('description', null, ['class'=>'form-control','required'=>'','id'=>"ckeditor"]) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">Departs</label>
                             <div class="col-sm-6">
                                 <div class="form-line">
