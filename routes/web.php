@@ -22,6 +22,9 @@ Route::get('package/{slug}', 'Frontend\FrontendController@packageDetails')->name
 Route::get('packages', 'Frontend\FrontendController@packages')->name('frontend.packages');
 Route::get('packages/{slug}', 'Frontend\FrontendController@typePackages')->name('frontend.type.packages');
 
+// search
+Route::get('packages-search', 'Frontend\PackageSearchesController@searchPackages')->name('frontend.packages.search');
+
 Auth::routes();
 
 // Dashboard

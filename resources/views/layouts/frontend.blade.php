@@ -84,7 +84,7 @@
 								<ul class="sf-menu" id="fh5co-primary-menu">
 									<li class="active"><a href="{!! route('frontend.home') !!}">Home</a></li>
 									<li>
-										<a href="{!! route('frontend.packages') !!}" class="fh5co-sub-ddown">Package</a>
+										<a class="fh5co-sub-ddown">Package</a>
 										<ul class="fh5co-sub-menu">
 											@if ($package_types->count())
 												@foreach ($package_types as $type)

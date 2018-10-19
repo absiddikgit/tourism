@@ -18,10 +18,23 @@
                                 </ul>
 
                                 <!-- Tab panes -->
-                                <form class="" action="" method="post">
+                                <form class="" action="{!! route('frontend.packages.search') !!}" method="get">
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="packages">
                                             <div class="row">
+                                                <div class="col-xxs-12 col-md-12 mt alternate">
+                                                    <div class="input-field">
+                                                        <label for="date-start">Package Type:</label>
+                                                        <select name="type" style="background-color:#EFEBEA; border:0" class="form-control" name="">
+                                                            <option value="">Choose</option>
+                                                            @if ($package_types->count())
+                                                                @foreach ($package_types as $type)
+                                                                    <option value="{{ $type->slug }}">{{ $type->type }}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <div class="col-xxs-12 col-xs-6 mt alternate">
                                                     <div class="input-field">
                                                         <label for="date-start">From:</label>

@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                    <h3>TYPE : {{ $type?strtoupper($type->type):'' }}</h3>
+                    <h3>Packages</h3>
                 </div>
             </div>
             <div class="row">
@@ -19,7 +19,7 @@
                                     <h3><a style="color: white" href="{!! route('frontend.package.details',$package->slug) !!}">{{ $package->title }}</a></h3>
                                     <span>{{ $package->getInterval()? $package->getInterval().' days' : '1 day' }}</span>
                                     <span>{{ $package->departs_date.' to '.$package->return_date }}</span>
-                                    <span class="price">৳{{ $package->cost }}</span>
+                                    <span class="price">৳{{ $package->cost?$package->cost:$package->getMinCost->cost }}</span>
                                     <a class="btn btn-primary btn-outline" href="#">Book Now <i class="icon-arrow-right22"></i></a>
                                 </div>
                             </div>

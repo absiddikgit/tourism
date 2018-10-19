@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 @if ($hotel->hotelImages->count())
-                    @foreach ($hotel->placeImages as $image)
+                    @foreach ($hotel->hotelImages as $image)
                         <div style="padding-bottom:15px" class="col-md-4">
                             <img class="img-thumbnail" width="100%" src="{{ $image->image }}" alt="">
                         </div>

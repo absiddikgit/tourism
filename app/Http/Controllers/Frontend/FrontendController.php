@@ -14,6 +14,7 @@ class FrontendController extends Controller
     public function index()
     {
         return view('welcome')
+        ->with('package_types', PackageType::orderBy('type')->get())
         ->with('top_3_packages', Package::where('status',1)->orderBy('created_at','desc')->take(3)->get())
         ->with('top_3_places', Place::orderBy('created_at','desc')->take(3)->get());
     }
@@ -59,11 +60,15 @@ class FrontendController extends Controller
 
     public function typePackages($slug)
     {
+        $packages = [];
         $type = PackageType::where('slug',$slug)->first();
-        $packages = Package::where('status',1)->select('packages.*','package_type_costs.cost')
-                                ->join('package_type_costs','package_type_costs.package_id','=','packages.id')
-                                ->where('package_type_costs.type',$type->id)
-                                ->paginate(9);
+        if ($type) {
+            $packages = Package::where('status',1)->select('packages.*','package_type_costs.cost')
+                                    ->join('package_type_costs','package_type_costs.package_id','=','packages.id')
+                                    ->where('package_type_costs.type',$type->id)
+                                    ->paginate(9);
+        }
+
 
         return view('frontend.type_packages')
         ->with('packages', $packages)

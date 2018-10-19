@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => 'Tourism',
+    'name' => 'BD Travel',
     'sort_name' => 'T',
 
     /*

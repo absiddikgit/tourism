@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
 @section('content')
-
+<div id="fh5co-blog-section" class="fh5co-section-gray">
     <div style="padding-top:35px">
         <div class="container">
             <div class="row">
@@ -54,5 +54,5 @@
             </div>
         </div>
     </div>
-
+</div>
 @endsection
