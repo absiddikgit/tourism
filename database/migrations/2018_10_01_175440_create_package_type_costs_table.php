@@ -17,7 +17,8 @@ class CreatePackageTypeCostsTable extends Migration
             $table->increments('id');
             $table->integer('package_id')->unsigned();
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
-            $table->tinyInteger('type');
+            $table->integer('type')->unsigned();
+            $table->foreign('type')->references('id')->on('package_types')->onDelete('cascade');
             $table->integer('cost')->unsigned();
             $table->timestamps();
         });
