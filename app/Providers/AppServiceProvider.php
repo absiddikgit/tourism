@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Role;
+use Illuminate\Support\Facades\View;
 use  Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use App\Models\Role;
+use App\Models\Admin\Package\PackageType;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        View::composer('layouts.frontend', function ($view) {
+            $view->with('package_types', PackageType::orderBy('type')->get());
+        });
     }
 
     /**
@@ -25,6 +30,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
+
     }
 }

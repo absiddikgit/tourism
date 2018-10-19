@@ -95,7 +95,7 @@ class PlacesController extends Controller
                 //     $constraint->aspectRatio();
                 // });
                 // $img->save($thumbnailpath);
-                $img = Image::make($thumbnailpath)->resize(600, 300)->save($thumbnailpath);
+                $img = Image::make($thumbnailpath)->resize(600, 500)->save($thumbnailpath);
 
                 $p_images[$i]['place_id'] = $place_id;
                 $p_images[$i]['image'] = $new_name;

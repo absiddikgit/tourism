@@ -95,7 +95,7 @@ class HotelsController extends Controller
                 //     $constraint->aspectRatio();
                 // });
                 // $img->save($thumbnailpath);
-                $img = Image::make($thumbnailpath)->resize(600, 300)->save($thumbnailpath);
+                $img = Image::make($thumbnailpath)->resize(600, 500)->save($thumbnailpath);
 
                 $h_images[$i]['hotel_id'] = $hotel_id;
                 $h_images[$i]['image'] = $new_name;

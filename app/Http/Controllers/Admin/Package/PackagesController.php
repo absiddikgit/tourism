@@ -69,7 +69,7 @@ class PackagesController extends Controller
 
         $input = $request->all();
 
-        $input['slug'] = str_slug($request->title);
+        $input['slug'] = str_slug($request->title.' '.time());
         $input['division_id'] = $request->division;
         $input['district_id'] = $request->district;
         $input['departs_date'] = date('Y-m-d',strtotime($request->departs));

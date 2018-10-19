@@ -3,6 +3,7 @@
 namespace App\Models\Admin\Package;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Admin\Package\PackageTypeCost;
 
 class Package extends Model
 {
@@ -68,6 +69,11 @@ class Package extends Model
     public function getBookingDeadlineAttribute($value='')
     {
         return date('d-m-Y', strtotime($value));
+    }
+
+    public function getMinCost()
+    {
+        return $this->hasOne(PackageTypeCost::class)->select('cost')->orderBy('cost');
     }
 
     public function getInterval()

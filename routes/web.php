@@ -10,9 +10,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Frontend
+Route::get('/', 'Frontend\FrontendController@index')->name('frontend.home');
+// place
+Route::get('place/{slug}', 'Frontend\FrontendController@placeDetails')->name('frontend.place.details');
+Route::get('places', 'Frontend\FrontendController@places')->name('frontend.places');
+// hotel
+Route::get('hotel/{slug}', 'Frontend\FrontendController@hotelDetails')->name('frontend.hotel.details');
+// package
+Route::get('package/{slug}', 'Frontend\FrontendController@packageDetails')->name('frontend.package.details');
+Route::get('packages', 'Frontend\FrontendController@packages')->name('frontend.packages');
+Route::get('packages/{slug}', 'Frontend\FrontendController@typePackages')->name('frontend.type.packages');
 
 Auth::routes();
 
