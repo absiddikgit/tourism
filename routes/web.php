@@ -62,6 +62,7 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
     // Package Type
     Route::resource('package-types', 'Admin\Package\PackageTypesController');
     Route::resource('packages', 'Admin\Package\PackagesController');
+    Route::get('packages-is-active/{id}', 'Admin\Package\PackagesController@isActive')->name('packages.is_active');
 
     // get data by ajax
     Route::post('getDistricts', 'Admin\Location\District\DistrictsController@getDistrict')->name('getDistrict');

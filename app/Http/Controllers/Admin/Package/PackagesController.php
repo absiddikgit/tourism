@@ -187,4 +187,19 @@ class PackagesController extends Controller
     {
         //
     }
+
+    public function isActive($id)
+    {
+        $package = Package::find($id);
+        if ($package->getOriginal('status')) {
+            $package->status = 0;
+            Session::flash('success','Package deactive successfully');
+        }else {
+            $package->status = 1;
+            Session::flash('success','Package active successfully');
+        }
+        $package->save();
+
+        return redirect()->route('packages.index');
+    }
 }

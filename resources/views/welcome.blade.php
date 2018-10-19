@@ -18,28 +18,30 @@
                                 </ul>
 
                                 <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active" id="packages">
-                                        <div class="row">
-                                            <div class="col-xxs-12 col-xs-6 mt alternate">
-                                                <div class="input-field">
-                                                    <label for="date-start">From:</label>
-                                                    <input type="text" class="form-control" id="date-start" placeholder="mm/dd/yyyy"/>
+                                <form class="" action="" method="post">
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" id="packages">
+                                            <div class="row">
+                                                <div class="col-xxs-12 col-xs-6 mt alternate">
+                                                    <div class="input-field">
+                                                        <label for="date-start">From:</label>
+                                                        <input name="from" type="text" class="form-control" id="date-start" placeholder="mm/dd/yyyy"/>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-xxs-12 col-xs-6 mt alternate">
-                                                <div class="input-field">
-                                                    <label for="date-end">To:</label>
-                                                    <input type="text" class="form-control" id="date-end" placeholder="mm/dd/yyyy"/>
+                                                <div class="col-xxs-12 col-xs-6 mt alternate">
+                                                    <div class="input-field">
+                                                        <label for="date-end">To:</label>
+                                                        <input name="to" type="text" class="form-control" id="date-end" placeholder="mm/dd/yyyy"/>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="col-xs-12">
-                                                <input type="submit" class="btn btn-primary btn-block" value="Search Packages">
+                                                <div class="col-xs-12">
+                                                    <input type="submit" class="btn btn-primary btn-block" value="Search Packages">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
 
                             </div>
                         </div>

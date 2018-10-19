@@ -44,6 +44,11 @@
                                         <td>{{ $p->status }}</td>
                                         <td>
                                             <a class="btn btn-sm btn-info" href="{{route('packages.show', $p->id)}}"> Show</a>
+                                            @if ($p->getOriginal('status'))
+                                                <a class="btn btn-xm btn-danger" href="{!! route('packages.is_active',$p->id) !!}">Deactive</a>
+                                            @else
+                                                <a class="btn btn-xm btn-success" href="{!! route('packages.is_active',$p->id) !!}">Active</a>
+                                            @endif
                                             <a class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#{{ $p->id }}">Delete</a>
 
                                             <form action="{{ route('packages.destroy', $p->id) }}" method="post">
