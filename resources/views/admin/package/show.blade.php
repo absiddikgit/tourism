@@ -108,7 +108,7 @@
                 </table>
                 <table class="table no-border">
                     <tr>
-                        <td colspan="3"><a class="btn btn-sm btn-primary pull-right" href="#">Update</a></td>
+                        <td colspan="3"><a class="btn btn-sm btn-primary pull-right" href="{!! route('packages.edit-place-hotel',$package->id) !!}">Update</a></td>
                     </tr>
                 </table>
 

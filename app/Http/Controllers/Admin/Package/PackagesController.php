@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Package;
 use Session;
 use Illuminate\Http\Request;
+use App\Models\Admin\Place\Place;
+use App\Models\Admin\Hotel\Hotel;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Package\Package;
 use App\Models\Admin\Location\Division;
@@ -186,6 +188,50 @@ class PackagesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function editPlaceHotel($id)
+    {
+        $package = Package::select('division_id','district_id')->find($id);
+
+        $places = Place::select('places.*','package_place.package_id as package_id')
+                        ->where('division_id',$package->division_id)
+                        ->where('district_id', $package->district_id)
+                        ->leftJoin('package_place',function ($join) use($id){
+                            $join->on('package_place.place_id','=','places.id');
+                            $join->where('package_place.package_id',$id);
+                        })->get();
+
+        $hotels = Hotel::select('hotels.*','hotel_package.package_id as package_id')
+                        ->where('division_id',$package->division_id)
+                        ->where('district_id', $package->district_id)
+                        ->leftJoin('hotel_package',function ($join) use($id){
+                            $join->on('hotel_package.hotel_id','=','hotels.id');
+                            $join->where('hotel_package.package_id',$id);
+                        })->get();
+
+        return view('admin.package.edit.place_hotel')
+        ->with('package_id', $id)
+        ->with('places', $places)
+        ->with('hotels', $hotels);
+    }
+
+    public function updatePlaceHotel(Request $r,$id)
+    {
+        $this->validate($r,[
+            // package place
+            'places' => 'required',
+
+            // package hotel
+            'hotels' => 'required',
+        ]);
+
+        $input =  $r->all();
+        $package = Package::find($id);
+        $package->places()->sync($input['places']);
+        $package->hotels()->sync($input['hotels']);
+
+        return redirect()->route('packages.show',$id);
     }
 
     public function isActive($id)

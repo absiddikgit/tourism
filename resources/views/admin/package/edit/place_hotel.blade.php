@@ -5,32 +5,54 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
-                    <h2>Update Package Type</h2>
+                    <h2>Update Package Place & Hotel</h2>
                 </div>
-                <div class="body">
-                    {{Form::model($package_type,['route'=>['package-types.update',$package_type->id],'method'=>'put','class'=>'form-horizontal'])}}
-                    @include('includes.errors')
+                <div class="body" style="overflow: hidden;">
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Type</label>
-                        <div class="col-sm-6">
-                            <div class="form-line">
-                                {{Form::text('type',$package_type->type,['class'=>'form-control','required'=>'','placeholder'=>'Package Type'])}}
-                            </div>
+                    <form action="{!! route('packages.update-place-hotel',$package_id) !!}" method="post">
+
+                        {{ csrf_field() }} {{ method_field('put') }}
+                        @include('includes.errors')
+                        <div class="col-md-12">
+                            <h3>Place</h3><hr>
+                            @if ($places->count())
+                                @foreach ($places as $place)
+                                    <div class="col-md-3">
+                                        <div class="img-thumbnail">
+                                            <img width="100%" class="" src="{{ $place->placeImages?$place->placeImages[0]->image:'' }}" alt="">
+                                            <div style="padding-top:5px" class="demo-checkbox">
+                                                <input id="{{ $place->slug }}" value="{{ $place->id }}" {{ $place->package_id?'checked':'' }} type="checkbox" name="places[]">
+                                                <label style="font-size:15px" for="{{ $place->slug }}">{{ $place->title }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label"></label>
-                        <div class="col-sm-6">
+                        <div class="col-md-12">
+                            <h3>Hotel</h3><hr>
+                            @if ($hotels->count())
+                                @foreach ($hotels as $hotel)
+                                    <div class="col-md-3">
+                                        <div class="img-thumbnail">
+                                            <img width="100%" class="" src="{{ $hotel->hotelImages?$hotel->hotelImages[0]->image:'' }}" alt="">
+                                            <div style="padding-top:5px" class="demo-checkbox">
+                                                <input id="{{ $hotel->slug }}" value="{{ $hotel->id }}" {{ $hotel->package_id?'checked':'' }} type="checkbox" name="hotels[]">
+                                                <label style="font-size:15px" for="{{ $hotel->slug }}">{{ $hotel->name }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="col-md-12">
                             <div class="pull-right">
-                                {{Form::submit('Save',['class'=>'btn btn-success'])}}
-                                <input class="btn btn-danger" type="reset" value="Reset">
+                                <input class="btn btn-primary" type="submit" name="" value="Update">
                             </div>
                         </div>
-                    </div>
+                    </form>
 
-                    {{Form::close()}}
                 </div>
             </div>
         </div>
