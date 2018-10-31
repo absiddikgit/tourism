@@ -1,8 +1,8 @@
 @extends('layouts.frontend')
 
 @section('content')
-
-    <div id="fh5co-features">
+    <img style="width: 100%; height: 300px" src="{{ $place->placeImages->count()?$place->placeImages[0]->image:'' }}" alt="">
+    <div style="margin-top:-260px" id="fh5co-features">
         <div class="container">
             <div class="row">
                 @if ($place->placeImages->count())

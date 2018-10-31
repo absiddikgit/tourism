@@ -16,7 +16,7 @@
                     @foreach ($places as $place)
                         <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="fh5co-blog animate-box">
-                                <a href="#"><img class="img-responsive" src="{{ $place->placeImages[0]->image }}" alt=""></a>
+                                <a href="#"><img class="img-responsive" src="{{ $place->placeImages?$place->placeImages[0]->image:'' }}" alt=""></a>
                                 <div class="blog-text">
                                     <div class="prod-title">
                                         <h3><a href="#">{{ $place->title }}</a></h3>

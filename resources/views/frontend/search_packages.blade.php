@@ -13,11 +13,11 @@
                 @if (count($packages))
                     @foreach ($packages as $package)
                         <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-                            <div href=""><img src="{{ $package->places[0]->placeImages[0]->image }}" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+                            <div href=""><img src="{{ ($package->places->count() && $package->places[0]->placeImages->count())?$package->places[0]->placeImages[0]->image:'' }}" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
                                 <div class="desc">
                                     <span></span>
                                     <h3><a style="color: white" href="{!! route('frontend.package.details',$package->slug) !!}">{{ $package->title }}</a></h3>
-                                    <span>{{ $package->getInterval()? $package->getInterval().' days' : '1 day' }}</span>
+                                    <span>{{ $package->getInterval()>1? $package->getInterval().' days' : '1 day' }}</span>
                                     <span>{{ $package->departs_date.' to '.$package->return_date }}</span>
                                     <span class="price">৳{{ $package->cost?$package->cost:$package->getMinCost->cost }}</span>
                                     <a class="btn btn-primary btn-outline" href="#">Book Now <i class="icon-arrow-right22"></i></a>

@@ -1,14 +1,18 @@
 @extends('layouts.frontend')
 
 @section('content')
-<div id="fh5co-blog-section" class="fh5co-section-gray">
+<img style="width: 100%; height: 300px" src="{{
+    ($package->places->count() && $package->places[0]->placeImages->count()) ?
+    $package->places[0]->placeImages[0]->image : '' }}" alt="">
+
+<div style="margin-top:-300px" id="fh5co-blog-section" class="fh5co-section-gray">
     <div style="padding-top:35px">
         <div class="container">
             <div class="row">
                 @if ($package->places->count())
                     @foreach ($package->places as $place)
                         <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-                            <div href=""><img src="{{ $place->placeImages[0]->image }}" alt="" class="img-responsive">
+                            <div href=""><img src="{{ $place->placeImages?$place->placeImages[0]->image:'' }}" alt="" class="img-responsive">
                                 <div class="desc">
                                     <span></span>
                                     <h3><a style="color: white" href="{!! route('frontend.place.details',$place->slug) !!}">{{ $place->title }}</a></h3>
@@ -41,7 +45,7 @@
                     @if ($package->hotels->count())
                         @foreach ($package->hotels as $hotel)
                             <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-                                <div href=""><img src="{{ $hotel->hotelImages[0]->image }}" alt="" class="img-responsive">
+                                <div href=""><img src="{{ $hotel->hotelImages?$hotel->hotelImages[0]->image:'' }}" alt="" class="img-responsive">
                                     <div class="desc">
                                         <span></span>
                                         <h3><a style="color: white" href="{!! route('frontend.hotel.details',$hotel->slug) !!}">{{ $hotel->name }}</a></h3>

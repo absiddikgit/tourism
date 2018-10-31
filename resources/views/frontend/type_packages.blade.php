@@ -13,7 +13,7 @@
                 @if (count($packages))
                     @foreach ($packages as $package)
                         <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-                            <div href=""><img src="{{ $package->places[0]->placeImages[0]->image }}" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+                            <div href=""><img src="{{ ($package->places->count() && $package->places[0]->placeImages->count())?$package->places[0]->placeImages[0]->image:'' }}" alt="" class="img-responsive">
                                 <div class="desc">
                                     <span></span>
                                     <h3><a style="color: white" href="{!! route('frontend.package.details',$package->slug) !!}">{{ $package->title }}</a></h3>
