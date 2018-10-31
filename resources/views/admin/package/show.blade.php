@@ -26,7 +26,7 @@
                     <tr>
                         <td width="120px">Duration</td>
                         <td width="1px">:</td>
-                        <td>{{ $package->getInterval() }} days</td>
+                        <td>{{ $package->getInterval()>1? $package->getInterval().' days' : '1 day' }}</td>
                     </tr>
                     <tr>
                         <td width="120px">Deadline Date</td>

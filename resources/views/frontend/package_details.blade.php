@@ -28,7 +28,7 @@
                     <div>
                         <h2 style="line-height: 55px !important; margin: 0">{{ $package->title }}</h2>
                         <h4 style="margin: 10px 0 10px 0"> <i class="icon-location"></i> {{ $package->district->name.', '.$package->division->name }}</h4>
-                        <span>{{ $package->getInterval()? $package->getInterval().' days' : '1 day' }}</span> |
+                        <span>{{ $package->getInterval()>1? $package->getInterval().' days' : '1 day' }}</span> |
                         <span>{{ $package->departs_date }}<b> to </b> {{ $package->return_date }}</span> <br>
                         @if ($i = $package->packageTypeCost->count())
                             @foreach ($package->packageTypeCost as $typeCost)
