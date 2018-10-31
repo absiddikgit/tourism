@@ -218,6 +218,9 @@
 
 	<!-- Main JS -->
 	<script src="{!! asset('frontend/js/main.js') !!}"></script>
+	<script src="{!! asset('js/vuejs/vue.js') !!}"></script>
+	<script src="{!! asset('js/vuejs/app.js') !!}"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	@yield('scripts')
 	</body>
 </html>

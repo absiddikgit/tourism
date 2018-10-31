@@ -66,6 +66,10 @@ class PackageSearchesController extends Controller
     public function getDistrictsInFront(Request $request)
     {
         $division = Division::where('slug',$request->slug)->first();
-        return District::where('division_id', $division->id)->get()->toArray();
+        // return District::where('division_id', $division->id)->get()->toArray();
+        //
+
+        return response()->json(District::where('division_id', $division->id)->get());
+
     }
 }

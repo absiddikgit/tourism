@@ -55,25 +55,29 @@
                                                         <input name="to" type="text" class="form-control" id="date-end" placeholder="mm/dd/yyyy"/>
                                                     </div>
                                                 </div>
-                                                <div class="col-xxs-12 col-md-6 mt alternate">
-                                                    <div class="input-field">
-                                                        <label for="date-start">Division:</label>
-                                                        <select id='division' name="division" class="form-control search_select" onchange="get_district_in_front(this.value);">
-                                                            <option value="">Choose</option>
-                                                            @if ($divisions->count())
-                                                                @foreach ($divisions as $division)
-                                                                    <option value="{{ $division->slug }}">{{ $division->name }}</option>
-                                                                @endforeach
-                                                            @endif
-                                                        </select>
+                                                <div id="app">
+                                                    <div class="col-xxs-12 col-md-6 mt alternate">
+                                                        <div class="input-field">
+                                                            <label for="date-start">Division:</label>
+                                                            {{-- <select id='division' name="division" class="form-control search_select" onchange="get_district_in_front(this.value);"> --}}
+                                                            <select id='division' name="division" class="form-control search_select" @change="get_district_in_front()" v-model="key">
+                                                                <option value="">Choose</option>
+                                                                @if ($divisions->count())
+                                                                    @foreach ($divisions as $division)
+                                                                        <option value="{{ $division->slug }}">{{ $division->name }}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-xxs-12 col-md-6 mt alternate">
-                                                    <div class="input-field">
-                                                        <label for="date-start">District:</label>
-                                                        <select name="district" class="form-control search_select" id="district">
-                                                            <option value="">Choose</option>
-                                                        </select>
+                                                    <div class="col-xxs-12 col-md-6 mt alternate">
+                                                        <div class="input-field">
+                                                            <label for="date-start">District:</label>
+                                                            <select name="district" class="form-control search_select" id="district" >
+                                                                <option value="">Choose</option>
+                                                                <option v-for="d in districts" :value="d.slug">@{{ d.name }}</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
 
