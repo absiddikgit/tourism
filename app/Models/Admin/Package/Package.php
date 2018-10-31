@@ -82,6 +82,6 @@ class Package extends Model
         $return = date_create($this->getOriginal('return_date'));
         $interval = date_diff($depart,$return);
         $days = $interval->format('%a');
-        return $days;
+        return $days+1;
     }
 }

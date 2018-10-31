@@ -119,7 +119,7 @@
                                 <div class="desc">
                                     <span></span>
                                     <h3><a style="color: white" href="{!! route('frontend.package.details',$package->slug) !!}">{{ $package->title }}</a></h3>
-                                    <span>{{ $package->getInterval()? $package->getInterval().' days' : '1 day' }}</span>
+                                    <span>{{ $package->getInterval()>1? $package->getInterval().' days' : '1 day' }}</span>
                                     <span>{{ $package->departs_date.' to '.$package->return_date }}</span>
                                     <span class="price">৳{{ $package->getMinCost->cost }}</span>
                                     <a class="btn btn-primary btn-outline" href="#">Book Now <i class="icon-arrow-right22"></i></a>
