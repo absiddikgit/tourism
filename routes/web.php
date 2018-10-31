@@ -24,6 +24,7 @@ Route::get('packages/{slug}', 'Frontend\FrontendController@typePackages')->name(
 
 // search
 Route::get('packages-search', 'Frontend\PackageSearchesController@searchPackages')->name('frontend.packages.search');
+Route::post('get-districts', 'Frontend\PackageSearchesController@getDistrictsInFront')->name('frontend.getDistrict');
 
 Auth::routes();
 

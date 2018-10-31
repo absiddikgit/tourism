@@ -7,6 +7,8 @@ use App\Models\Admin\Place\Place;
 use App\Models\Admin\Hotel\Hotel;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Package\Package;
+use App\Models\Admin\Location\Division;
+use App\Models\Admin\Location\District;
 use App\Models\Admin\Package\PackageType;
 
 class PackageSearchesController extends Controller
@@ -14,8 +16,9 @@ class PackageSearchesController extends Controller
     public function searchPackages(Request $request)
     {
         $packages = [];
+        $whereClause = [];
 
-        if ($request->type == null && $request->from == null && $request->to == null) {
+        if ($request->type == null && $request->from == null && $request->to == null && $request->division == null && $request->district == null) {
             return redirect()->back();
         }
 
@@ -31,6 +34,16 @@ class PackageSearchesController extends Controller
             $request['to'] = '9999-12-31';
         }
 
+        if ($request->division) {
+            $division = Division::where('slug',$request->division)->first();
+            $whereClause['packages.division_id'] = $division->id;
+        }
+
+        if ($request->district) {
+            $district = District::where('slug',$request->district)->first();
+            $whereClause['packages.district_id'] = $district->id;
+        }
+
         // return Package::whereBetween('departs_date', array($request->from,$request->to))->get();
 
         if ($request->type != null) {
@@ -39,13 +52,20 @@ class PackageSearchesController extends Controller
                 $packages = Package::where('status',1)->select('packages.*','package_type_costs.cost')
                                         ->join('package_type_costs','package_type_costs.package_id','=','packages.id')
                                         ->where('package_type_costs.type',$type->id)
+                                        ->where($whereClause)
                                         ->whereBetween('packages.departs_date', array($request->from,$request->to))
                                         ->paginate(9);
             }
         }else {
-            $packages = Package::whereBetween('departs_date', array($request->from,$request->to))->paginate(9);
+            $packages = Package::whereBetween('departs_date', array($request->from,$request->to))->where($whereClause)->paginate(9);
         }
         return view('frontend.search_packages')
         ->with('packages', $packages);
+    }
+
+    public function getDistrictsInFront(Request $request)
+    {
+        $division = Division::where('slug',$request->slug)->first();
+        return District::where('division_id', $division->id)->get()->toArray();
     }
 }

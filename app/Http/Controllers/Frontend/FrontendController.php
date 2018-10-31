@@ -7,6 +7,7 @@ use App\Models\Admin\Place\Place;
 use App\Models\Admin\Hotel\Hotel;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Package\Package;
+use App\Models\Admin\Location\Division;
 use App\Models\Admin\Package\PackageType;
 
 class FrontendController extends Controller
@@ -15,6 +16,7 @@ class FrontendController extends Controller
     {
         return view('welcome')
         ->with('package_types', PackageType::orderBy('type')->get())
+        ->with('divisions', Division::orderBy('name')->get())
         ->with('top_3_packages', Package::where('status',1)->orderBy('created_at','desc')->take(3)->get())
         ->with('top_3_places', Place::orderBy('created_at','desc')->take(3)->get());
     }

@@ -34,7 +34,7 @@ class DivisionsController extends Controller
 
         $division = new Division;
         $division->name = $request->division;
-        $division->slug = str_slug($request->name);
+        $division->slug = str_slug($request->division);
         if ($division->save()) {
             Session::flash('success','Division created successfully');
         }
@@ -68,7 +68,7 @@ class DivisionsController extends Controller
 
         $division = Division::find($id);
         $division->name = $request->division;
-        $division->slug = str_slug($request->name);
+        $division->slug = str_slug($request->division);
         if ($division->save()) {
             Session::flash('success','Division updated successfully');
         }

@@ -31,7 +31,7 @@ class DistrictsController extends Controller
 
         $district = new District;
         $district->name = $request->district;
-        $district->slug = str_slug($request->name);
+        $district->slug = str_slug($request->district);
         $district->division_id = $request->division;
 
         if ($district->save()) {
@@ -55,7 +55,7 @@ class DistrictsController extends Controller
 
         $district = District::find($id);
         $district->name = $request->district;
-        $district->slug = str_slug($request->name);
+        $district->slug = str_slug($request->district);
         if ($district->save()) {
             Session::flash('success','District updated successfully');
         }

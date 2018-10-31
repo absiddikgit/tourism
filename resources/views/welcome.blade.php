@@ -1,6 +1,14 @@
 @extends('layouts.frontend')
 
 @section('content')
+    <style media="screen">
+        .search_select{
+            background-color:#EFEBEA;
+            border:0;
+            color:#F78536;
+            font-weight: bold;
+        }
+    </style>
     <div class="fh5co-hero">
         <div class="fh5co-overlay"></div>
         <div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url({!! asset('frontend/images/cover_bg_1.jpg') !!});">
@@ -25,7 +33,7 @@
                                                 <div class="col-xxs-12 col-md-12 mt alternate">
                                                     <div class="input-field">
                                                         <label for="date-start">Package Type:</label>
-                                                        <select name="type" style="background-color:#EFEBEA; border:0" class="form-control" name="">
+                                                        <select name="type" class="form-control search_select">
                                                             <option value="">Choose</option>
                                                             @if ($package_types->count())
                                                                 @foreach ($package_types as $type)
@@ -45,6 +53,27 @@
                                                     <div class="input-field">
                                                         <label for="date-end">To:</label>
                                                         <input name="to" type="text" class="form-control" id="date-end" placeholder="mm/dd/yyyy"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xxs-12 col-md-6 mt alternate">
+                                                    <div class="input-field">
+                                                        <label for="date-start">Division:</label>
+                                                        <select id='division' name="division" class="form-control search_select" onchange="get_district_in_front(this.value);">
+                                                            <option value="">Choose</option>
+                                                            @if ($divisions->count())
+                                                                @foreach ($divisions as $division)
+                                                                    <option value="{{ $division->slug }}">{{ $division->name }}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xxs-12 col-md-6 mt alternate">
+                                                    <div class="input-field">
+                                                        <label for="date-start">District:</label>
+                                                        <select name="district" class="form-control search_select" id="district">
+                                                            <option value="">Choose</option>
+                                                        </select>
                                                     </div>
                                                 </div>
 
@@ -319,4 +348,7 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    @include('includes.ajaxScript.location')
 @endsection
