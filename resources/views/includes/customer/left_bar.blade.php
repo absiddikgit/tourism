@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title"></h3>
+        <h3 style="margin:10px">Panel</h3>
     </div>
     <div class="panel-body">
     {{-- <ul class="list-group">
