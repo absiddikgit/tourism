@@ -32,10 +32,6 @@ Route::get('get-districts', 'Frontend\PackageSearchesController@getDistrictsInFr
 
 
 
-
-
-
-
 /*****************************************
  *              Customer Area
  ******************************************/
@@ -50,16 +46,15 @@ Route::get('register/confirm', 'ConfirmEmailController@index')->name('confirm.em
 
 
 Route::group(['middleware'=>'auth:customer'], function() {
+    // dashboard
     Route::get('/dashboard', 'Customer\HomeController@index')->name('customer.dashboard');
+    // profile
     Route::get('/profile', 'Customer\HomeController@profile')->name('customer.profile');
     Route::post('/profile', 'Customer\HomeController@profileStore')->name('customer.profile.store');
+    // change password
+    Route::get('/change-password', 'Customer\HomeController@changePassword')->name('customer.change-password');
+    Route::post('/change-password', 'Customer\HomeController@changePasswordStore')->name('customer.change-password.store');
 });
-
-
-
-
-
-
 
 
 

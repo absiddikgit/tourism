@@ -16,7 +16,7 @@
             <a href="{!! route('customer.profile') !!}"> <b>Profile</b> </a>
         </p>
         <p>
-            <a href=""> <b>Change Password</b> </a>
+            <a href="{!! route('customer.change-password') !!}"> <b>Change Password</b> </a>
         </p>
     </div>
 </div>

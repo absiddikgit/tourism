@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Customer;
 use Auth;
 use Session;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Customer\Customer;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Customer\CustomerInfo;
 
 class HomeController extends Controller
@@ -35,6 +36,12 @@ class HomeController extends Controller
             'postcode'       => 'required|max:255',
         ]);
 
+        if ($request->name) {
+            $customer = Customer::find($user_id);
+            $customer->update($request->all());
+            Session::flash('success','Successfully Profile updated');
+        }
+
         if ($customerInfo = CustomerInfo::where('customer_id',$user_id)->first()) {
             Session::flash('success','Successfully Profile updated');
             $customerInfo->update($request->all());
@@ -46,8 +53,28 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-    public function changePassword($value='')
+    public function changePassword()
     {
-        // code...
+        return view('frontend.customer.change_password');
+    }
+
+    public function changePasswordStore(Request $request)
+    {
+        $this->validate($request,[
+            'old_password' => 'required|min:6',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $customer = Customer::find(Auth::guard('customer')->user()->id);
+
+        if (Hash::check($request->old_password, $customer->password)) {
+            $customer->password = bcrypt($request->password);;
+            if ($customer->save()) {
+                Session::flash('success','Successfully password changed');
+            }
+        }else{
+            Session::flash('info','Old password doesn\'t match');
+        }
+        return redirect()->back();
     }
 }

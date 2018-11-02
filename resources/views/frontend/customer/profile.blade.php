@@ -21,6 +21,7 @@
                         <div class="panel-body">
                             <form style="padding-top:20px" class="" action="{!! route('customer.profile.store') !!}" method="post">
                                 {{ csrf_field() }}
+                                @include('includes.errors')
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="f-label" for="">Name *</label>
