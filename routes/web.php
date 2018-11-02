@@ -10,6 +10,9 @@
 |
 */
 
+/*****************************************
+ *              Frontend Area
+ ******************************************/
 // Frontend
 Route::get('/', 'Frontend\FrontendController@index')->name('frontend.home');
 // place
@@ -33,8 +36,9 @@ Route::get('get-districts', 'Frontend\PackageSearchesController@getDistrictsInFr
 
 
 
-// customer
-//
+/*****************************************
+ *              Customer Area
+ ******************************************/
 // customer login
 
 Route::get('/login', 'Auth\CustomerLoginController@showLoginForm')->name('login');
@@ -47,6 +51,8 @@ Route::get('register/confirm', 'ConfirmEmailController@index')->name('confirm.em
 
 Route::group(['middleware'=>'auth:customer'], function() {
     Route::get('/dashboard', 'Customer\HomeController@index')->name('customer.dashboard');
+    Route::get('/profile', 'Customer\HomeController@profile')->name('customer.profile');
+    Route::post('/profile', 'Customer\HomeController@profileStore')->name('customer.profile.store');
 });
 
 
@@ -58,9 +64,9 @@ Route::group(['middleware'=>'auth:customer'], function() {
 
 
 
-
-
-
+/*****************************************
+ *               Admin Area
+ ******************************************/
 // auth
 $this->get('admin/login', 'Auth\LoginController@showLoginForm')->name('admin.login');
 $this->post('admin/login', 'Auth\LoginController@login')->name('admin.login.submit');

@@ -40,4 +40,12 @@ class Customer extends Authenticatable
         $this->is_active = true;
         $this->save();
     }
+
+    /**
+     * Get the CustomerInfo record associated with the model.
+     */
+    public function customerInfo()
+    {
+        return $this->hasOne(CustomerInfo::class);
+    }
 }
