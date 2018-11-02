@@ -61,6 +61,9 @@
 
 	<link rel="stylesheet" href="{!! asset('frontend/css/style.css') !!}">
 
+	<!-- toastr -->
+    <link rel="stylesheet" type="text/css" id="theme" href="{{asset('css/toastr.min.css')}}"/>
+
 	@yield('styles')
 
 
@@ -98,6 +101,35 @@
 									</li>
 									<li><a href="{!! route('frontend.places') !!}">Place</a></li>
 									<li><a href="">Contact</a></li>
+									@if (auth('customer')->check())
+										<li>
+											<a class="fh5co-sub-ddown">{{ auth('customer')->user()->name }}</a>
+											<ul class="fh5co-sub-menu">
+												<li>
+													<a href="{{ route('customer.dashboard') }}">
+														Dashboard
+													</a>
+												</li>
+												<li>
+													<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+														Sign out
+													</a>
+												</li>
+
+												<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+		                                            {{ csrf_field() }}
+		                                        </form>
+											</ul>
+										</li>
+									@else
+										<li>
+											<a class="fh5co-sub-ddown">Account</a>
+											<ul class="fh5co-sub-menu">
+												<li><a href="{!! route('login') !!}">Sign in</a></li>
+												<li><a href="{!! route('customer.register') !!}">Sign up</a></li>
+											</ul>
+										</li>
+									@endif
 								</ul>
 							</nav>
 						</div>
@@ -221,6 +253,16 @@
 	<script src="{!! asset('js/vuejs/vue.js') !!}"></script>
 	<script src="{!! asset('js/vuejs/app.js') !!}"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- toastr -->
+    <script type="text/javascript" src="{{asset('js/toastr.min.js')}}"></script>
+    <script type="text/javascript">
+        @if (Session::has('success'))
+            toastr.success("{{Session::get('success')}}")
+        @endif
+        @if (Session::has('info'))
+            toastr.info("{{Session::get('info')}}")
+        @endif
+    </script>
 	@yield('scripts')
 	</body>
 </html>

@@ -24,13 +24,52 @@ Route::get('packages/{slug}', 'Frontend\FrontendController@typePackages')->name(
 // search
 Route::get('packages-search', 'Frontend\PackageSearchesController@searchPackages')->name('frontend.packages.search');
 Route::get('get-districts', 'Frontend\PackageSearchesController@getDistrictsInFront')->name('frontend.getDistrict');
-// auth
-Auth::routes();
 
-// admin Dashboard
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
+
+
+
+
+
+
+
+// customer
+//
+// customer login
+
+Route::get('/login', 'Auth\CustomerLoginController@showLoginForm')->name('login');
+Route::post('/login', 'Auth\CustomerLoginController@login')->name('customer.login.submit');
+
+Route::get('/register', 'Auth\CustomerRegistersController@register')->name('customer.register');
+Route::post('/register', 'Auth\CustomerRegistersController@store')->name('customer.register.store');
+Route::get('register/confirm', 'ConfirmEmailController@index')->name('confirm.email');
+
+
+Route::group(['middleware'=>'auth:customer'], function() {
+    Route::get('/dashboard', 'Customer\HomeController@index')->name('customer.dashboard');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+// auth
+$this->get('admin/login', 'Auth\LoginController@showLoginForm')->name('admin.login');
+$this->post('admin/login', 'Auth\LoginController@login')->name('admin.login.submit');
+$this->post('logout', 'Auth\LoginController@logout')->name('logout');
+
 // admin
 Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
+    // Dashboard
+    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
     // User
     Route::resource('user', 'Admin\User\UsersController');
     Route::get('user/{user_id}/activate', 'Admin\User\UsersController@user_activate')->name('user.activated');
