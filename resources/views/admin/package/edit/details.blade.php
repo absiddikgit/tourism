@@ -84,20 +84,24 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">Per Head Cost</label>
+                            <div class="col-md-6">
+                                <div class="form-line">
+                                    <input class="form-control" required type="number" name="cost" value="{{ $package->cost }}" placeholder="Per Head Cost">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">Type</label>
                             <div class="col-sm-6">
                                 @if ($package_types)
                                     @foreach ($package_types as $pt)
                                         <div style="padding-top:9px" class="demo-checkbox">
                                             <div class="row">
-                                                <div class="col-md-4" style="padding-top:10px">
-                                                    <input class="test" {{ $pt->cost?'checked':'' }} onclick="cost_available(this.value)" id="{{ $pt->id }}" value="{{ $pt->id }}" type="checkbox" name="package_types[]">
+                                                <div class="col-md-6" style="padding-top:10px">
+                                                    <input class="test" {{ $pt->package_id?'checked':'' }}  id="{{ $pt->id }}" value="{{ $pt->id }}" type="checkbox" name="types[]">
                                                     <label style="font-size:15px" for="{{ $pt->id }}">{{ $pt->type }}</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="form-line">
-                                                        <input id="cost_{{ $pt->id }}" {{ $pt->cost?'':'disabled' }} class="form-control" required type="text" name="package_costs[]" value="{{ $pt->cost != null?$pt->cost:'' }}" placeholder="Cost">
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

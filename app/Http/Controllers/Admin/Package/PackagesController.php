@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Admin\Package;
+
 use Session;
 use Illuminate\Http\Request;
 use App\Models\Admin\Place\Place;
 use App\Models\Admin\Hotel\Hotel;
+use App\Models\Admin\Package\Type;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Package\Package;
 use App\Models\Admin\Location\Division;
-use App\Models\Admin\Package\PackageType;
 use App\Models\Admin\Package\PackageTypeCost;
 
 class PackagesController extends Controller
@@ -33,7 +34,7 @@ class PackagesController extends Controller
     {
         return view('admin.package.create')
                 ->with('status', Package::STATUS)
-                ->with('package_types', PackageType::orderBy('type')->pluck('type','id')->all())
+                ->with('package_types', Type::orderBy('type')->pluck('type','id')->all())
                 ->with('divisions', Division::orderBy('name')->pluck('name','id')->all());
     }
 
@@ -57,14 +58,13 @@ class PackagesController extends Controller
             'hotels' => 'required',
 
             // package
-            'departs' => 'required',
-            'return' => 'required',
+            'departs'  => 'required',
+            'return'   => 'required',
             'deadline' => 'required',
+            'cost'     => 'required|min:2',
 
             // package type cost
-            'package_types' => 'required',
-            'package_costs' => 'required',
-
+            'types' => 'required',
             // package
             'status' => 'required',
         ]);
@@ -81,27 +81,13 @@ class PackagesController extends Controller
         $package = Package::create($input);
         $package->places()->sync($input['places']);
         $package->hotels()->sync($input['hotels']);
+        $package->types()->sync($input['types']);
 
-        $package_type_cost = $this->packageTypeCost($input['package_types'], $input['package_costs'], $package->id);
-
-        if (PackageTypeCost::insert($package_type_cost)) {
+        if ($package) {
             Session::flash('success','Package created successfully');
         }
 
         return redirect()->back();
-    }
-
-    public function packageTypeCost($type,$cost,$package_id)
-    {
-        $data = [];
-
-        for ($i=0; $i < count($type) ; $i++) {
-            $data[$i]['package_id'] = $package_id;
-            $data[$i]['type'] = $type[$i];
-            $data[$i]['cost'] = $cost[$i];
-        }
-
-        return $data;
     }
 
     /**
@@ -124,11 +110,13 @@ class PackagesController extends Controller
      */
     public function edit($id)
     {
-        $package_types = PackageType::select('package_types.id','package_types.type','package_type_costs.cost')->leftJoin('package_type_costs', function($join)use($id){
-                                                $join->on('package_type_costs.type', '=', 'package_types.id')
-                                                 ->where('package_type_costs.package_id', '=', $id);
-                                            })
-                                            ->get();
+        $package_types = Type::select('types.*', 'package_type.package_id')
+                                ->leftJoin('package_type', function($join)use($id){
+                                    $join->on('package_type.type_id', '=', 'types.id')
+                                            ->where('package_type.package_id', '=', $id);
+                                })
+                                ->orderBy('type')
+                                ->get();
         return view('admin.package.edit.details')
                 ->with('package_types', $package_types)
                 ->with('package', Package::find($id));
@@ -150,28 +138,25 @@ class PackagesController extends Controller
             'deadline' => 'required',
 
             // package type cost
-            'package_types' => 'required',
-            'package_costs' => 'required',
+            'types' => 'required',
+            'cost' => 'required',
         ]);
 
         $package = Package::find($id);
 
         $input = $request->all();
 
-        $input['slug'] = str_slug($request->title);
+        $input['slug'] = str_slug($request->title.' '.time());
         $input['departs_date'] = date('Y-m-d',strtotime($request->departs));
         $input['return_date'] = date('Y-m-d',strtotime($request->return));
         $input['booking_deadline'] = date('Y-m-d',strtotime($request->deadline));
 
         $package->update($input);
 
-        if (PackageTypeCost::where('package_id',$id)->count()) {
-            PackageTypeCost::where('package_id',$id)->delete();
-        }
 
-        $package_type_cost = $this->packageTypeCost($input['package_types'], $input['package_costs'], $package->id);
+        $package->types()->sync($input['types']);
 
-        if (PackageTypeCost::insert($package_type_cost)) {
+        if ($package) {
             Session::flash('success','Package details updated successfully');
         }
 
@@ -187,7 +172,13 @@ class PackagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $package = Package::find($id);
+
+        if ($package->delete()) {
+            Session::flash('success','Package deleted successfully');
+        }
+
+        return redirect()->route('packages.index');
     }
 
     public function editPlaceHotel($id)

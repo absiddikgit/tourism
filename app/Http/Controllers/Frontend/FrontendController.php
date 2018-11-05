@@ -5,18 +5,18 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Models\Admin\Place\Place;
 use App\Models\Admin\Hotel\Hotel;
+use App\Models\Admin\Package\Type;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Package\Package;
 use App\Models\Admin\Location\Division;
-use App\Models\Admin\Package\PackageType;
 
 class FrontendController extends Controller
 {
     public function index()
     {
         return view('welcome')
-        ->with('package_types', PackageType::orderBy('type')->get())
-        ->with('divisions', Division::orderBy('name')->get())
+        // ->with('package_types', Type::orderBy('type')->get())
+        // ->with('divisions', Division::orderBy('name')->get())
         ->with('top_3_packages', Package::where('status',1)->orderBy('created_at','desc')->take(3)->get())
         ->with('top_3_places', Place::orderBy('created_at','desc')->take(3)->get());
     }
@@ -63,11 +63,11 @@ class FrontendController extends Controller
     public function typePackages($slug)
     {
         $packages = [];
-        $type = PackageType::where('slug',$slug)->first();
+        $type = Type::where('slug',$slug)->first();
         if ($type) {
-            $packages = Package::where('status',1)->select('packages.*','package_type_costs.cost')
-                                    ->join('package_type_costs','package_type_costs.package_id','=','packages.id')
-                                    ->where('package_type_costs.type',$type->id)
+            $packages = Package::where('status',1)->select('packages.*')
+                                    ->join('package_type','package_type.package_id','=','packages.id')
+                                    ->where('package_type.type_id',$type->id)
                                     ->paginate(9);
         }
 

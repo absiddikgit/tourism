@@ -166,85 +166,10 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="{!! route('package-types.index') !!}">Package Type</a>
+                                <a href="{!! route('package-types.index') !!}">Type</a>
                             </li>
                             <li>
                                 <a href="{!! route('packages.index') !!}">Package</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="material-icons">text_fields</i>
-                            <span>Typography</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="material-icons">layers</i>
-                            <span>Helper Classes</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">widgets</i>
-                            <span>Widgets</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="javascript:void(0);" class="menu-toggle">
-                                    <span>Cards</span>
-                                </a>
-                                <ul class="ml-menu">
-                                    <li>
-                                        <a href="">Basic</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Colored</a>
-                                    </li>
-                                    <li>
-                                        <a href="">No Header</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" class="menu-toggle">
-                                    <span>Infobox</span>
-                                </a>
-                                <ul class="ml-menu">
-                                    <li>
-                                        <a href="">Infobox-1</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Infobox-2</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Infobox-3</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Infobox-4</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Infobox-5</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">swap_calls</i>
-                            <span>User Interface (UI)</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="">Alerts</a>
-                            </li>
-                            <li>
-                                <a href="">Animations</a>
-                            </li>
-                            <li>
-                                <a href="">Badges</a>
                             </li>
                         </ul>
                     </li>

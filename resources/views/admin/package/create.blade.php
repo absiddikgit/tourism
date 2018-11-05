@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Description</label>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-6">
                                         <div class="form-line">
                                             {!! Form::textarea('description', null, ['class'=>'form-control','required'=>'','id'=>"ckeditor"]) !!}
                                         </div>
@@ -124,20 +124,24 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="col-sm-3 control-label">Per Head Cost</label>
+                                    <div class="col-md-6">
+                                        <div class="form-line">
+                                            <input class="form-control" required type="number" name="cost" value="{{ old('cost') }}" placeholder="Per Head Cost">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="col-sm-3 control-label">Type</label>
                                     <div class="col-sm-6">
                                         @if ($package_types)
                                             @foreach ($package_types as $id => $type)
                                                 <div style="padding-top:9px" class="demo-checkbox">
                                                     <div class="row">
-                                                        <div class="col-md-4" style="padding-top:10px">
-                                                            <input onclick="cost_available(this.value)" id="{{ $id }}" value="{{ $id }}" type="checkbox" required name="package_types[]">
+                                                        <div class="col-md-6" style="padding-top:10px">
+                                                            <input onclick="cost_available(this.value)" id="{{ $id }}" value="{{ $id }}" type="checkbox" required name="types[]">
                                                             <label style="font-size:15px" for="{{ $id }}">{{ $type }}</label>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <div class="form-line">
-                                                                <input id="cost_{{ $id }}" disabled class="form-control" required type="text" name="package_costs[]" value="" placeholder="Cost">
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

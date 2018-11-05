@@ -63,6 +63,22 @@
 
 	<!-- toastr -->
     <link rel="stylesheet" type="text/css" id="theme" href="{{asset('css/toastr.min.css')}}"/>
+	<style media="screen">
+        .search_select{
+            background-color:#EFEBEA;
+            border:0;
+            color:#F78536;
+            font-weight: bold;
+        }
+		.mt-75{
+			margin-top: -75px;
+		}
+		@media only screen and (max-width: 1366px) {
+			.search_bar{
+				padding: 0;
+			}
+		}
+    </style>
 
 	@yield('styles')
 

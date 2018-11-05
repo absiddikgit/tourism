@@ -3,10 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Role;
+use App\Models\Admin\Package\Type;
 use Illuminate\Support\Facades\View;
-use  Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Schema;
+use App\Models\Admin\Location\Division;
 use Illuminate\Support\ServiceProvider;
-use App\Models\Admin\Package\PackageType;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,9 +19,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        View::composer('layouts.frontend', function ($view) {
-            $view->with('package_types', PackageType::orderBy('type')->get());
-        });
+        // View::composer('layouts.frontend', function ($view) {
+        //     $view->with('package_types', Type::orderBy('type')->get());
+        // });
+        //
+        View::share('package_types', Type::orderBy('type')->get());
+        View::share('divisions', Division::orderBy('name')->get());
     }
 
     /**

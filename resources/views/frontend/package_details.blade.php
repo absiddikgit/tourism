@@ -29,10 +29,11 @@
                         <h2 style="line-height: 55px !important; margin: 0">{{ $package->title }}</h2>
                         <h4 style="margin: 10px 0 10px 0"> <i class="icon-location"></i> {{ $package->district->name.', '.$package->division->name }}</h4>
                         <span>{{ $package->getInterval()>1? $package->getInterval().' days' : '1 day' }}</span> |
-                        <span>{{ $package->departs_date }}<b> to </b> {{ $package->return_date }}</span> <br>
-                        @if ($i = $package->packageTypeCost->count())
-                            @foreach ($package->packageTypeCost as $typeCost)
-                                <span>{{ $typeCost->packageType->type }} --- ৳{{ $typeCost->cost }}</span> {{ --$i?'|':'' }}
+                        <span> <b> {{ $package->departs_date }}</b> to <b> {{ $package->return_date }} </b> </span> <br>
+                        <span>Per Head  <b> ৳{{ $package->cost }}</b></span> <br>
+                        @if ($i = $package->types->count())
+                            @foreach ($package->types as $type)
+                                <span>{{ $type->type }}</span> {{ --$i?'|':'' }}
                             @endforeach
                         @endif
                     </div>

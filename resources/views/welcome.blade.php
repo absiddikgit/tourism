@@ -1,14 +1,7 @@
 @extends('layouts.frontend')
 
 @section('content')
-    <style media="screen">
-        .search_select{
-            background-color:#EFEBEA;
-            border:0;
-            color:#F78536;
-            font-weight: bold;
-        }
-    </style>
+
     <div class="fh5co-hero">
         <div class="fh5co-overlay"></div>
         <div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url({!! asset('frontend/images/cover_bg_1.jpg') !!});">
@@ -115,14 +108,14 @@
                 @if ($top_3_packages->count())
                     @foreach ($top_3_packages as $package)
                         <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
-                            <div href=""><img src="{{ $package->places[0]->placeImages[0]->image }}" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+                            <div href=""><img src="{{ $package->places && $package->places[0]->placeImages?$package->places[0]->placeImages[0]->image:'' }}" alt="" class="img-responsive">
                                 <div class="desc">
                                     <span></span>
                                     <h3><a style="color: white" href="{!! route('frontend.package.details',$package->slug) !!}">{{ $package->title }}</a></h3>
                                     <span>{{ $package->getInterval()>1? $package->getInterval().' days' : '1 day' }}</span>
                                     <span>{{ $package->departs_date.' to '.$package->return_date }}</span>
-                                    <span class="price">৳{{ $package->getMinCost->cost }}</span>
-                                    <a class="btn btn-primary btn-outline" href="#">Book Now <i class="icon-arrow-right22"></i></a>
+                                    <span class="price">৳{{ $package->cost }} <small style="font-size: 13px">( Per Head )</small> </span>
+                                    <a class="btn btn-primary btn-outline" href="{!! route('frontend.package.booking',$package->slug) !!}">Book Now <i class="icon-arrow-right22"></i></a>
                                 </div>
                             </div>
                         </div>

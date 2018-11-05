@@ -19,3 +19,16 @@ new Vue({
     }
 
 });
+
+new Vue({
+    el: '#booking_form',
+    data: {
+        picked: "",
+        show_more_input: false,
+    },
+    methods: {
+        total_amount: function () {
+            this.show_more_input = true;
+        }
+    }
+});

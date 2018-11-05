@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Models\Admin\Place\Place;
 use App\Models\Admin\Hotel\Hotel;
+use App\Models\Admin\Package\Type;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Package\Package;
 use App\Models\Admin\Location\Division;
 use App\Models\Admin\Location\District;
-use App\Models\Admin\Package\PackageType;
 
 class PackageSearchesController extends Controller
 {
@@ -47,11 +47,11 @@ class PackageSearchesController extends Controller
         // return Package::whereBetween('departs_date', array($request->from,$request->to))->get();
 
         if ($request->type != null) {
-            $type = PackageType::where('slug',$request->type)->first();
+            $type = Type::where('slug',$request->type)->first();
             if ($type) {
-                $packages = Package::where('status',1)->select('packages.*','package_type_costs.cost')
-                                        ->join('package_type_costs','package_type_costs.package_id','=','packages.id')
-                                        ->where('package_type_costs.type',$type->id)
+                $packages = Package::where('status',1)->select('packages.*','package_type.package_id')
+                                        ->join('package_type','package_type.package_id','=','packages.id')
+                                        ->where('package_type.type_id',$type->id)
                                         ->where($whereClause)
                                         ->whereBetween('packages.departs_date', array($request->from,$request->to))
                                         ->paginate(9);

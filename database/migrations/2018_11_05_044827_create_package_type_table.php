@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePackageTypeCostsTable extends Migration
+class CreatePackageTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreatePackageTypeCostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('package_type_costs', function (Blueprint $table) {
+        Schema::create('package_type', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('package_id')->unsigned();
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
-            $table->integer('type')->unsigned();
-            $table->foreign('type')->references('id')->on('package_types')->onDelete('cascade');
-            $table->integer('cost')->unsigned();
+            $table->integer('type_id')->unsigned();
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreatePackageTypeCostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('package_type_costs');
+        Schema::dropIfExists('package_type');
     }
 }

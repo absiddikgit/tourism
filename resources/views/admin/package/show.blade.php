@@ -39,18 +39,19 @@
                         <td>{{ $package->status }}</td>
                     </tr>
                     <tr>
-                        <td width="120px">Type & Cost</td>
+                        <td width="120px">Per Head Cost</td>
+                        <td width="1px">:</td>
+                        <td>{{ $package->cost }}</td>
+                    </tr>
+                    <tr>
+                        <td width="120px">Type</td>
                         <td width="1px">:</td>
                         <td>
-                            @foreach ($package->packageTypeCost as $ptc)
-                                <table>
-                                    <tr>
-                                        <td width="80px">{{ $ptc->packageType->type }}</td>
-                                        <td width="1px">:</td>
-                                        <td>{{ $ptc->cost }}</td>
-                                    </tr>
-                                </table>
-                            @endforeach
+                            @if ($num_of_types = $package->types->count())
+                                @foreach ($package->types as $type)
+                                    {{ $type->type }} {{ 1<$num_of_types--?',':'' }}
+                                @endforeach
+                            @endif
                         </td>
                     </tr>
                     <tr>

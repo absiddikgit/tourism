@@ -3,13 +3,13 @@
 namespace App\Models\Admin\Package;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Admin\Package\PackageTypeCost;
+use App\Models\Admin\Package\PackageType;
 
 class Package extends Model
 {
     const STATUS = [''=>'Choose','1'=>'Active','0'=>'Deactive'];
 
-    protected $fillable = ['title','slug','division_id','district_id','description','departs_date','return_date','booking_deadline','status'];
+    protected $fillable = ['title','slug','division_id','district_id','description','cost','departs_date','return_date','booking_deadline','status'];
 
     /**
      * Get the Division that owns the model.
@@ -28,11 +28,11 @@ class Package extends Model
     }
 
     /**
-     * Get the PackageTypeCost for the model.
+     * The Type that belong to the model.
      */
-    public function packageTypeCost()
+    public function types()
     {
-        return $this->hasMany(PackageTypeCost::class);
+        return $this->belongsToMany(Type::class);
     }
 
     /**
@@ -69,11 +69,6 @@ class Package extends Model
     public function getBookingDeadlineAttribute($value='')
     {
         return date('d-m-Y', strtotime($value));
-    }
-
-    public function getMinCost()
-    {
-        return $this->hasOne(PackageTypeCost::class)->select('cost')->orderBy('cost');
     }
 
     public function getInterval()

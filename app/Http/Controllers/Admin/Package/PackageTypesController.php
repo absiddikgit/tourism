@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Admin\Package;
 
 use Session;
 use Illuminate\Http\Request;
+use App\Models\Admin\Package\Type;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Package\PackageType;
 
 class PackageTypesController extends Controller
 {
     public function index()
     {
         return view('admin.package_type.index')
-        ->with('package_types', PackageType::orderBy('type')->get());
+        ->with('package_types', Type::orderBy('type')->get());
     }
 
     public function create()
@@ -23,13 +23,13 @@ class PackageTypesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'type' => 'required|min:2|unique:package_types,type',
+            'type' => 'required|min:2|unique:types,type',
         ]);
 
-        $package_type = new PackageType;
-        $package_type->type = $request->type;
-        $package_type->slug = str_slug($request->type);
-        if ($package_type->save()) {
+        $type = new Type;
+        $type->type = $request->type;
+        $type->slug = str_slug($request->type);
+        if ($type->save()) {
             Session::flash('success','Package Type created successfully');
         }
         return redirect()->back();
@@ -38,19 +38,19 @@ class PackageTypesController extends Controller
     public function edit($id)
     {
         return view('admin.package_type.edit')
-        ->with('package_type', PackageType::find($id));
+        ->with('package_type', Type::find($id));
     }
 
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'type' => 'required|min:2|unique:package_types,type,'.$id,
+            'type' => 'required|min:2|unique:types,type,'.$id,
         ]);
 
-        $package_type = PackageType::find($id);
-        $package_type->type = $request->type;
-        $package_type->slug = str_slug($request->type);
-        if ($package_type->save()) {
+        $type = Type::find($id);
+        $type->type = $request->type;
+        $type->slug = str_slug($request->type);
+        if ($type->save()) {
             Session::flash('success','Package Type updated successfully');
         }
         return redirect()->route('package-types.index');
@@ -58,9 +58,9 @@ class PackageTypesController extends Controller
 
     public function destroy($id)
     {
-        $package_type = PackageType::find($id);
+        $type = Type::find($id);
 
-        if ($package_type->delete()) {
+        if ($type->delete()) {
             Session::flash('success','Package Type deleted successfully');
         }
         return redirect()->route('package-types.index');

@@ -22,6 +22,7 @@ class CreatePackagesTable extends Migration
             $table->integer('district_id')->unsigned();
             $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
             $table->text('description')->nullable();
+            $table->integer('cost');
             $table->date('departs_date');
             $table->date('return_date');
             $table->date('booking_deadline');

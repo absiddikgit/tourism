@@ -28,8 +28,8 @@ Route::get('packages/{slug}', 'Frontend\FrontendController@typePackages')->name(
 Route::get('packages-search', 'Frontend\PackageSearchesController@searchPackages')->name('frontend.packages.search');
 Route::get('get-districts', 'Frontend\PackageSearchesController@getDistrictsInFront')->name('frontend.getDistrict');
 
-
-
+// booking
+Route::get('booking/{package_slug}','Frontend\BookingController@packageBooking')->name('frontend.package.booking');
 
 
 /*****************************************
@@ -54,6 +54,9 @@ Route::group(['middleware'=>'auth:customer'], function() {
     // change password
     Route::get('/change-password', 'Customer\HomeController@changePassword')->name('customer.change-password');
     Route::post('/change-password', 'Customer\HomeController@changePasswordStore')->name('customer.change-password.store');
+
+    // booking
+    // Route::get('booking/{package_slug}','Frontend\BookingController@packageBooking')->name('frontend.package.booking');
 });
 
 
