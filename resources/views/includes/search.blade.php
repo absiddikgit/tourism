@@ -1,6 +1,6 @@
-<div class="col-md-4 col-md-offset-4 search_bar">
+<div class="col-md-6 col-md-offset-3 search_bar">
     <div style="box-shadow:none; margin:0 0 40px 0" class="tabulation animate-box">
-        
+
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
@@ -16,7 +16,7 @@
                         <div class="col-xxs-12 col-md-12 mt alternate">
                             <div class="input-field">
                                 <label for="date-start">Package Type:</label>
-                                <select name="type" class="form-control search_select">
+                                <select required name="type" class="form-control search_select">
                                     <option value="">Choose</option>
                                     @if ($package_types->count())
                                         @foreach ($package_types as $type)

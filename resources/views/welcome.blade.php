@@ -26,7 +26,7 @@
                                                 <div class="col-xxs-12 col-md-12 mt alternate">
                                                     <div class="input-field">
                                                         <label for="date-start">Package Type:</label>
-                                                        <select name="type" class="form-control search_select">
+                                                        <select required name="type" class="form-control search_select">
                                                             <option value="">Choose</option>
                                                             @if ($package_types->count())
                                                                 @foreach ($package_types as $type)
@@ -114,7 +114,7 @@
                                     <h3><a style="color: white" href="{!! route('frontend.package.details',$package->slug) !!}">{{ $package->title }}</a></h3>
                                     <span>{{ $package->getInterval()>1? $package->getInterval().' days' : '1 day' }}</span>
                                     <span>{{ $package->departs_date.' to '.$package->return_date }}</span>
-                                    <span class="price">৳{{ $package->cost }} <small style="font-size: 13px">( Per Head )</small> </span>
+                                    <span class="price">${{ $package->cost }} <small style="font-size: 13px">( Per Head )</small> </span>
                                     <a class="btn btn-primary btn-outline" href="{!! route('frontend.package.booking',$package->slug) !!}">Book Now <i class="icon-arrow-right22"></i></a>
                                 </div>
                             </div>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 
 use Auth;
-use Session;
 use Illuminate\Http\Request;
 use App\Models\Booking\Booking;
 use App\Models\Customer\Customer;
@@ -26,11 +25,6 @@ class BookingController extends Controller
         $package = Package::where('slug',$request->package)->first();
         $type = Type::where('slug',$request->type)->first();
         $user = Customer::find(Auth::guard('customer')->user()->id);
-
-        if (!$user->customerInfo) {
-            Session::flash('success','Please update you details');
-            return redirect()->route('customer.profile');
-        }
 
         $qty = '';
         if ($request->num_of_travelers) {
@@ -102,10 +96,8 @@ class BookingController extends Controller
 
     public function paymentComplete(Request $request)
     {
-        $type = Type::where('slug',$request->type)->first();
-
         $provider = new ExpressCheckout;
-        $response = $provider->getExpressCheckoutDetails($request->token);
+        return $response = $provider->getExpressCheckoutDetails($request->token);
 
         $booking = new Booking();
 
@@ -113,22 +105,22 @@ class BookingController extends Controller
 
         $booking->package_id = $request->package;
 
-        $booking->type_id = $type->id;
+        $booking->type_id = $request->type;
 
         $booking->num_of_travelers = $request->qty;
 
         $booking->contact_number = $request->contact_number;
 
-        $booking->invoice_id = $response['INVNUM'];
+        $booking->invoice_id = $response->INVNUM;
 
-        $booking->total_cost = $response['AMT'];
+        $booking->total_cost = $response->AMT;
 
         $booking->payer_id = $request->PayerID;
 
         $booking->token = $request->token;
 
         if ($booking->save()) {
-            Session::flash('success','Booking has been completed successfully');
+            Session::flash('success','<b>Success! </b>Booking is completed');
         }
 
         return redirect()->route('customer.dashboard');

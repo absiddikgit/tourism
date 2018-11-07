@@ -30,6 +30,7 @@
                     <h4 style="margin: 10px 0 10px 0"> <i class="icon-location"></i> {{ $package->district->name.', '.$package->division->name }}</h4>
                     <span>{{ $package->getInterval()>1? $package->getInterval().' days' : '1 day' }}</span> |
                     <span>{{ $package->departs_date }}<b> to </b> {{ $package->return_date }}</span> <br>
+                    <span>Per Head Cost --- ${{ $package->cost }}</span> <br>
                     @if ($i = $package->types->count())
                         @foreach ($package->types as $type)
                             <span>{{ $type->type }}</span> {{ --$i?'|':'' }}
@@ -42,17 +43,20 @@
             </div>
             <div style="padding-top:30px" class="col-md-8">
                 <div id="booking_form" class="col-md-12 div-s text-justify">
-                    <form style="padding:20px 5px" class="" action="" method="post">
+                    <input type="hidden" name="per_head_cost" id="cost" value="{{ $package->cost }}">
+                    <form style="padding:20px 5px" class="" action="{!! route('frontend.package.booking.confirm') !!}" method="get">
+                        {{-- {{ csrf_field() }} --}}
+                        <input type="hidden" name="package" value="{{ $package->slug }}">
                         <div class="form-group">
                             <label for="">Types:</label>
                             <div style="padding: 0px 50px">
                                 @if ($package->types->count())
                                     @foreach ($package->types as $type)
-                                        <input v-model="picked" type="radio" name="type" value="{{ $type->slug }}"> {{ $type->type }}<br>
+                                        <input required v-model="picked" type="radio" name="type" value="{{ $type->slug }}"> {{ $type->type }}<br>
                                         @if ($type->slug == 'family')
-                                            <div v-show="picked === 'family'" style="padding: 5px 0 0 50px">
-                                                <input class="s-input" type="text" name="num_of_travelers" value="" placeholder="Number of total travelers">
-                                                <input class="s-input" type="text" name="num_of_child" value="" placeholder="Number of total childs">
+                                            <div v-if="picked === 'family'" style="padding: 5px 0 0 50px">
+                                                <input v-model="total_travelers" class="s-input" type="number" name="num_of_travelers" value="" placeholder="Number of travelers" required min="3" step="1" max="100">
+                                                {{-- <input class="s-input" type="text" name="num_of_child" value="" placeholder="Number of total childs"> --}}
                                             </div>
                                         @endif
                                     @endforeach
@@ -61,11 +65,12 @@
                         </div>
 
                         <div class="form-group">
-                          <label for=""></label>
-                          <input type="text" class="form-control" id="" placeholder="">
-                          <p class="help-block">Help text here.</p>
+                            <label for="">Total Cost: </label>
+                            <span v-if="picked === 'family'">$@{{ total_amount() }}</span>
+                            <span v-if="picked === 'couple'">$@{{ cost*2 }}</span>
+                            <span v-if="picked === 'single'">$@{{ cost }}</span>
                         </div>
-
+                        <input class="btn btn-primary" type="submit" name="" value="Continue">
                     </form>
                 </div>
             </div>

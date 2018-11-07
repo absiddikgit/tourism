@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +33,7 @@ Route::get('get-districts', 'Frontend\PackageSearchesController@getDistrictsInFr
 Route::get('booking/{package_slug}','Frontend\BookingController@packageBooking')->name('frontend.package.booking');
 
 
+
 /*****************************************
  *              Customer Area
  ******************************************/
@@ -56,7 +58,9 @@ Route::group(['middleware'=>'auth:customer'], function() {
     Route::post('/change-password', 'Customer\HomeController@changePasswordStore')->name('customer.change-password.store');
 
     // booking
-    // Route::get('booking/{package_slug}','Frontend\BookingController@packageBooking')->name('frontend.package.booking');
+    Route::get('booking','Frontend\BookingController@bookingConfirm')->name('frontend.package.booking.confirm');
+    Route::post('booking-pay/paypal','Frontend\BookingController@payWithPaypal')->name('frontend.booking.pay-with-paypal');
+    Route::get('booking-payment','Frontend\BookingController@paymentComplete')->name('frontend.booking.payment.store');
 });
 
 
