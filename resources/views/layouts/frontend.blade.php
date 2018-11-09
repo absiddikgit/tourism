@@ -121,7 +121,7 @@
 										</ul>
 									</li>
 									<li><a href="{!! route('frontend.places') !!}">Place</a></li>
-									<li><a href="">Contact</a></li>
+									<li><a href="{!! route('frontend.contact') !!}">Contact</a></li>
 									@if (auth('customer')->check())
 										<li>
 											<a class="fh5co-sub-ddown">{{ auth('customer')->user()->name }}</a>
@@ -173,19 +173,21 @@
 									<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
 										<h3>Top Hotels</h3>
 										<ul>
-											<li><a href="#">Boracay Hotel</a></li>
-											<li><a href="#">Dubai Hotel</a></li>
-											<li><a href="#">Singapore Hotel</a></li>
-											<li><a href="#">Manila Hotel</a></li>
+											@if ($top_5_hotels)
+												@foreach ($top_5_hotels as $hotel)
+													<li><a href="#">{{ $hotel->name }}</a></li>
+												@endforeach
+											@endif
 										</ul>
 									</div>
 									<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
 										<h3>Best Places</h3>
 										<ul>
-											<li><a href="#">Boracay Beach</a></li>
-											<li><a href="#">Dubai</a></li>
-											<li><a href="#">Singapore</a></li>
-											<li><a href="#">Hongkong</a></li>
+											@if ($top_5_places)
+												@foreach ($top_5_places as $place)
+													<li><a href="#">{{ $place->title }}</a></li>
+												@endforeach
+											@endif
 										</ul>
 									</div>
 									<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
@@ -199,9 +201,9 @@
 									<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
 										<h3>User Account</h3>
 										<ul>
-											<li><a href="#">Sign in</a></li>
-											<li><a href="#">Sign up</a></li>
-											<li><a href="#">Account settings</a></li>
+											<li><a href="{!! route('login') !!}">Sign in</a></li>
+											<li><a href="{!! route('customer.register') !!}">Sign up</a></li>
+											<li><a href="{!! route('customer.dashboard') !!}">Account settings</a></li>
 										</ul>
 									</div>
 									<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
@@ -209,7 +211,6 @@
 										<ul>
 											<li><a href="#">About Us</a></li>
 											<li><a href="#">Terms & Conditions</a></li>
-											<li><a href="#">Privacy</a></li>
 										</ul>
 									</div>
 								</div>

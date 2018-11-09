@@ -32,6 +32,10 @@ Route::get('get-districts', 'Frontend\PackageSearchesController@getDistrictsInFr
 // booking
 Route::get('booking/{package_slug}','Frontend\BookingController@packageBooking')->name('frontend.package.booking');
 
+// contact
+Route::get('contact', 'Frontend\ContactsController@index')->name('frontend.contact');
+Route::post('contact', 'Frontend\ContactsController@store')->name('frontend.contact.store');
+
 
 
 /*****************************************
