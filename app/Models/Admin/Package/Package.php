@@ -4,6 +4,7 @@ namespace App\Models\Admin\Package;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Admin\Package\PackageType;
+use App\Models\Booking\Booking;
 
 class Package extends Model
 {
@@ -78,5 +79,13 @@ class Package extends Model
         $interval = date_diff($depart,$return);
         $days = $interval->format('%a');
         return $days+1;
+    }
+
+    /**
+     * Get the Booking for the model.
+     */
+    public function booking()
+    {
+        return $this->hasMany(Booking::class);
     }
 }

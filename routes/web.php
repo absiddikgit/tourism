@@ -124,6 +124,15 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
     Route::put('package/{id}/update-place-hotel', 'Admin\Package\PackagesController@updatePlaceHotel')->name('packages.update-place-hotel');
     Route::get('packages-is-active/{id}', 'Admin\Package\PackagesController@isActive')->name('packages.is_active');
 
+    // Booking
+
+    Route::get('booking-packages', 'Admin\Booking\BookingController@index')->name('booking.packages');
+    Route::get('booking-list/{package_id}', 'Admin\Booking\BookingController@list')->name('booking.list');
+
+    // Customer
+    Route::get('customers', 'Admin\Customer\CustomersController@index')->name('customers');
+    Route::delete('customers/{id}', 'Admin\Customer\CustomersController@destroy')->name('customers.destroy');
+
     // get data by ajax
     Route::post('getDistricts', 'Admin\Location\District\DistrictsController@getDistrict')->name('getDistrict');
     Route::post('getPlaces', 'Admin\Place\PlacesController@getPlace')->name('getPlace');

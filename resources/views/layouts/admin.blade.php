@@ -19,7 +19,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="{!! asset('material-icon/material-icons.css') !!}" rel="stylesheet" type="text/css">
-    
+
     <!-- Bootstrap Core Css -->
     <link href="{!! asset('admin/plugins/bootstrap/css/bootstrap.css') !!}" rel="stylesheet">
 
@@ -176,6 +176,19 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="">
+                        <a href="{!! route('customers') !!}">
+                            <i class="material-icons">people</i>
+                            <span>Customers</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{!! route('booking.packages') !!}">
+                            <i class="material-icons">present_to_all</i>
+                            <span>Booking</span>
+                        </a>
+                    </li>
+
                 </ul>
             </div>
             <!-- #Menu -->
