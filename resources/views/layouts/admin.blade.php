@@ -130,38 +130,40 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="{!! route('user.index') !!}">
-                            <i class="material-icons">supervisor_account</i>
-                            <span>User</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">map</i>
-                            <span>Location</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="{!! route('divisions.index') !!}">Division</a>
-                            </li>
-                            <li>
-                                <a href="{!! route('districts.index') !!}">District</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="">
-                        <a href="{!! route('places.index') !!}">
-                            <i class="material-icons">place</i>
-                            <span>Place</span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="{!! route('hotels.index') !!}">
-                            <i class="material-icons">hotel</i>
-                            <span>Hotel</span>
-                        </a>
-                    </li>
+                    @if (Auth::user()->is_admin)
+                        <li class="">
+                            <a href="{!! route('user.index') !!}">
+                                <i class="material-icons">supervisor_account</i>
+                                <span>User</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">map</i>
+                                <span>Location</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li>
+                                    <a href="{!! route('divisions.index') !!}">Division</a>
+                                </li>
+                                <li>
+                                    <a href="{!! route('districts.index') !!}">District</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="">
+                            <a href="{!! route('places.index') !!}">
+                                <i class="material-icons">place</i>
+                                <span>Place</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="{!! route('hotels.index') !!}">
+                                <i class="material-icons">hotel</i>
+                                <span>Hotel</span>
+                            </a>
+                        </li>
+                    @endif
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">map</i>
