@@ -9,12 +9,14 @@ use App\Models\Customer\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Customer\CustomerInfo;
+use App\Models\Booking\Booking;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('frontend.customer.dashboard');
+        return view('frontend.customer.dashboard')
+        ->with('booked_packages', Booking::where('customer_id', Auth::guard('customer')->user()->id)->latest()->paginate(5));
     }
 
     public function profile()

@@ -42,6 +42,7 @@
 	<link rel="shortcut icon" href="favicon.ico">
 
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{!! asset('fontawesome/css/all.css') !!}">
 
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="{!! asset('frontend/css/animate.css') !!}">
@@ -77,6 +78,10 @@
 			.search_bar{
 				padding: 0;
 			}
+		}
+		.no-border tr td{
+			border:0 !important;
+			padding: 2px !important;
 		}
     </style>
 

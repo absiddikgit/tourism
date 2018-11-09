@@ -10,7 +10,7 @@
     </ul> --}}
     <div style="padding: 20px 20px; line-height: 8px">
         <p>
-            <a href=""> <b>Dashboard</b> </a>
+            <a href="{!! route('customer.dashboard') !!}"> <b>Dashboard</b> </a>
         </p>
         <p>
             <a href="{!! route('customer.profile') !!}"> <b>Profile</b> </a>

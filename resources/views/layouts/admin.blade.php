@@ -14,9 +14,12 @@
     <!-- Google Fonts -->
     {{-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css"> --}}
     {{-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css"> --}}
-    <link rel="stylesheet" href="{!! asset('admin/css/fonts-css.css') !!}">
-    <link rel="stylesheet" href="{!! asset('admin/css/material-icon.css') !!}">
-
+    {{-- <link rel="stylesheet" href="{!! asset('admin/css/fonts-css.css') !!}">
+    <link rel="stylesheet" href="{!! asset('admin/css/material-icon.css') !!}"> --}}
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="{!! asset('material-icon/material-icons.css') !!}" rel="stylesheet" type="text/css">
+    
     <!-- Bootstrap Core Css -->
     <link href="{!! asset('admin/plugins/bootstrap/css/bootstrap.css') !!}" rel="stylesheet">
 

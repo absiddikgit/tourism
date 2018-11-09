@@ -36,6 +36,9 @@
                                 <span>{{ $type->type }}</span> {{ --$i?'|':'' }}
                             @endforeach
                         @endif
+                        @if ($package->status)
+                            <br><br> <a class="btn btn-primary btn-outline" href="{!! route('frontend.package.booking',$package->slug) !!}">Book Now <i class="icon-arrow-right22"></i></a>
+                        @endif
                     </div>
                     <p>{!! $package->description !!}</p>
                 </div>
