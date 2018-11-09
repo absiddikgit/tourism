@@ -30,6 +30,7 @@
                         <h4 style="margin: 10px 0 10px 0"> <i class="icon-location"></i> {{ $package->district->name.', '.$package->division->name }}</h4>
                         <span>{{ $package->getInterval()>1? $package->getInterval().' days' : '1 day' }}</span> |
                         <span> <b> {{ $package->departs_date }}</b> to <b> {{ $package->return_date }} </b> </span> <br>
+                        <span>Booking Deadline  <b> ${{ $package->booking_deadline }}</b></span> <br>
                         <span>Per Head  <b> ${{ $package->cost }}</b></span> <br>
                         @if ($i = $package->types->count())
                             @foreach ($package->types as $type)
