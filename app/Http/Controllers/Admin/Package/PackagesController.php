@@ -228,6 +228,21 @@ class PackagesController extends Controller
     public function isActive($id)
     {
         $package = Package::find($id);
+
+        $now = date_create(date('Y-m-d'));
+        $p_deadline = date_create($package->booking_deadline);
+
+        if (date_diff($now,$p_deadline)->format('%R%a')<0) {
+            Session::flash('info','Please update booking deadline');
+            return redirect()->back();
+
+        }
+
+
+
+
+
+
         if ($package->getOriginal('status')) {
             $package->status = 0;
             Session::flash('success','Package deactive successfully');
