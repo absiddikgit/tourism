@@ -209,8 +209,8 @@
 									<div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
 										<h3>Company</h3>
 										<ul>
-											<li><a href="#">About Us</a></li>
-											<li><a href="#">Terms & Conditions</a></li>
+											<li><a href="{!! route('about-us') !!}">About Us</a></li>
+											<li><a href="{!! route('terms_n_onditions') !!}">Terms & Conditions</a></li>
 										</ul>
 									</div>
 								</div>

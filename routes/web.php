@@ -37,6 +37,17 @@ Route::get('contact', 'Frontend\ContactsController@index')->name('frontend.conta
 Route::post('contact', 'Frontend\ContactsController@store')->name('frontend.contact.store');
 
 
+Route::get('about-us', function() {
+    return view('frontend.site.about_us');
+})->name('about-us');
+
+Route::get('terms-&-onditions', function() {
+    return view('frontend.site.terms_n_onditions');
+})->name('terms_n_onditions');
+
+
+
+
 
 /*****************************************
  *              Customer Area
