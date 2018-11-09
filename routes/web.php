@@ -133,6 +133,10 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
     Route::get('customers', 'Admin\Customer\CustomersController@index')->name('customers');
     Route::delete('customers/{id}', 'Admin\Customer\CustomersController@destroy')->name('customers.destroy');
 
+    // contact
+    Route::get('contacts', 'Admin\Contact\ContactsController@index')->name('contacts');
+    Route::delete('contacts/{id}', 'Admin\Contact\ContactsController@destroy')->name('contacts.destroy');
+
     // get data by ajax
     Route::post('getDistricts', 'Admin\Location\District\DistrictsController@getDistrict')->name('getDistrict');
     Route::post('getPlaces', 'Admin\Place\PlacesController@getPlace')->name('getPlace');

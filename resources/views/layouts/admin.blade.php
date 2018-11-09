@@ -189,6 +189,13 @@
                         </a>
                     </li>
 
+                    <li class="">
+                        <a href="{!! route('contacts') !!}">
+                            <i class="material-icons">message</i>
+                            <span>Inbox</span>
+                        </a>
+                    </li>
+
                 </ul>
             </div>
             <!-- #Menu -->
