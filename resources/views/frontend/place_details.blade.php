@@ -23,6 +23,11 @@
                     <p>{!! $place->description !!}</p>
                     <iframe width="100%" height="350" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDVFg0qp7TwGBUTTzfqBeiTf-CRP_Rc1S8&q={{ $place->location }}" allowfullscreen></iframe>
                 </div>
+                <br>
+                <div class="col-md-12">
+                    <h2>Comment</h2>
+                    @include('includes.disqus')
+                </div>
             </div>
         </div>
     </div>
