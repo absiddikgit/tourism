@@ -19,6 +19,7 @@
                                     <th>City</th>
                                     <th>Country</th>
                                     <th>Postcode</th>
+                                    <th>NID/Passport</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -37,6 +38,7 @@
                                             <td>{{ $c->customerInfo->city }}</td>
                                             <td>{{ $c->customerInfo->country }}</td>
                                             <td>{{ $c->customerInfo->postcode }}</td>
+                                            <td>{{ $c->customerInfo->NID }}</td>
                                             <td>
                                                 <a class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#{{ $c->id }}">Delete</a>
 

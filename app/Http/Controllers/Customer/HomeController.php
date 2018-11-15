@@ -36,6 +36,7 @@ class HomeController extends Controller
             'address'        => 'required|string|max:255',
             'city'           => 'required|string|max:255',
             'postcode'       => 'required|max:255',
+            'NID'       => 'required|max:255',
         ]);
 
         if ($request->name) {

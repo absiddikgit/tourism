@@ -61,6 +61,12 @@
                                         <input type="text" class="form-control" name="postcode"  placeholder="Postcode" value="{{ $user && $user->customerInfo?$user->customerInfo->postcode:old('postcode') }}" required>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="f-label" for="">NID / Passport *</label>
+                                        <input type="text" class="form-control" name="NID"  placeholder="NID / Passport" value="{{ $user && $user->customerInfo?$user->customerInfo->NID:old('NID') }}" required>
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group pull-right">
                                         <label class="f-label" for=""></label>
