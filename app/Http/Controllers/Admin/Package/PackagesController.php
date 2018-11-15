@@ -58,10 +58,11 @@ class PackagesController extends Controller
             'hotels' => 'required',
 
             // package
-            'departs'  => 'required',
-            'return'   => 'required',
-            'deadline' => 'required',
-            'cost'     => 'required|min:2',
+            'departs'    => 'required',
+            'return'     => 'required',
+            'deadline'   => 'required',
+            'total_seat' => 'required|numeric',
+            'cost'       => 'required|min:2',
 
             // package type cost
             'types' => 'required',

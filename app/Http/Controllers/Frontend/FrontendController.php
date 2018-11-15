@@ -47,7 +47,7 @@ class FrontendController extends Controller
 
     public function packageDetails($slug)
     {
-        $package = Package::where('status',1)->where('slug',$slug)->first();
+        $package = Package::where('slug',$slug)->first();
 
         return view('frontend.package_details')
         ->with('package', $package);

@@ -100,28 +100,59 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                    <h3>Hot Tours</h3>
+                    <h3 class="text-uppercase">Hot Tours</h3>
                     <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                 </div>
             </div>
             <div class="row">
                 @if ($top_3_packages->count())
                     @foreach ($top_3_packages as $package)
-                        <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
+                        {{-- <div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
                             <div href=""><img src="{{ $package->places && $package->places[0]->placeImages?$package->places[0]->placeImages[0]->image:'' }}" alt="" class="img-responsive">
                                 <div class="desc">
                                     <span></span>
                                     <h3><a style="color: white" href="{!! route('frontend.package.details',$package->slug) !!}">{{ $package->title }}</a></h3>
                                     <span>{{ $package->getInterval()>1? $package->getInterval().' days' : '1 day' }}</span>
                                     <span>{{ $package->departs_date.' to '.$package->return_date }}</span>
+                                    <span>Available Seat : {{ $package->availableSeat() }}</span>
                                     <span class="price">${{ $package->cost }} <small style="font-size: 13px">( Per Head )</small> </span>
                                     <a class="btn btn-primary btn-outline" href="{!! route('frontend.package.booking',$package->slug) !!}">Book Now <i class="icon-arrow-right22"></i></a>
                                 </div>
                             </div>
+                        </div> --}}
+
+                        <div class="col-md-4">
+                            <div class="img-thumbnail" style="padding:0;">
+                                <img width="300px" src="{{ $package->places && $package->places[0]->placeImages?$package->places[0]->placeImages[0]->image:'' }}" alt="" class="img-responsive">
+                                <div style="margin:0 0 15px 0;padding:4px; background:#F78536;color:white" class="col-md-12">
+                                    <div class="col-md-6">
+                                        <h5 style="margin: 0;color:white;padding-top:15px"><i class="fa fa-clock"></i>  {{ $package->getInterval()>1? $package->getInterval().' days' : '1 day' }}</h5>
+                                    </div>
+                                    <div class="col-md-6" style="text-align:right">
+                                        <h5 style="margin: 0;color:white">Per Head Cost</h5>
+                                        <h3 style="margin: 0;color:white; padding-top:5px">${{ $package->cost }}</h3>
+                                    </div>
+                                </div>
+                                <div style="padding:10px">
+                                    <h3 style="margin:0"><a href="{!! route('frontend.package.details',$package->slug) !!}">{{ $package->title }}</a></h3>
+                                    <span></span><br>
+                                    <div style="line-height: 5px">
+                                        <p> <i class="fa fa-map-marker-alt"></i> {{ $package->district->name.','.$package->division->name }}</p>
+                                        <p>{{ $package->departs_date.' to '.$package->return_date }}</p>
+                                        <p><b>Available Seat : {{ $package->availableSeat() }}</b></p>
+                                    </div>
+                                    @if ($package->availableSeat())
+                                        <a class="btn btn-primary" href="{!! route('frontend.package.booking',$package->slug) !!}">Book Now <i class="icon-arrow-right22"></i></a>
+                                    @else
+                                        <a class="btn btn-primary" href="{!! route('frontend.package.details',$package->slug) !!}">Details <i class="icon-arrow-right22"></i></a>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
+
                     @endforeach
                 @endif
-                <div class="col-md-12 text-center animate-box">
+                <div style="margin-top:25px" class="col-md-12 text-center animate-box">
                     <p><a class="btn btn-primary btn-outline btn-lg" href="{!! route('frontend.packages') !!}">See All Packages <i class="icon-arrow-right22"></i></a></p>
                 </div>
             </div>
@@ -220,7 +251,7 @@
                             <div class="title-bg">
                                 <div class="case-studies-summary">
                                     <h2>Most Popular Destinations</h2>
-                                    <span><a href="#">View All Destinations</a></span>
+                                    <span><a href="{!! route('frontend.places') !!}">View All Destinations</a></span>
                                 </div>
                             </div>
                         </li>
@@ -269,7 +300,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                    <h3>Places</h3>
+                    <h3 class="text-uppercase">Places</h3>
                 </div>
             </div>
         </div>
@@ -306,7 +337,7 @@
         <div class="container">
             <div class="row animate-box">
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                    <h2>Happy Clients</h2>
+                    <h2 class="text-uppercase">Happy Clients</h2>
                 </div>
             </div>
             <div class="row">
@@ -316,7 +347,7 @@
                             <span class="quote"><span><i class="icon-quotes-right"></i></span></span>
                             <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
                         </blockquote>
-                        <p class="author">John Doe, CEO <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a> <span class="subtext">Creative Director</span></p>
+                        <p class="author">John Doe, CEO <a href="" target="_blank">{{ config('app.name') }}</a> <span class="subtext">Creative Director</span></p>
                     </div>
 
                 </div>
@@ -326,7 +357,7 @@
                             <span class="quote"><span><i class="icon-quotes-right"></i></span></span>
                             <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.&rdquo;</p>
                         </blockquote>
-                        <p class="author">John Doe, CEO <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a> <span class="subtext">Creative Director</span></p>
+                        <p class="author">John Doe, CEO <a href="" target="_blank">{{ config('app.name') }}</a> <span class="subtext">Creative Director</span></p>
                     </div>
 
 
@@ -337,7 +368,7 @@
                             <span class="quote"><span><i class="icon-quotes-right"></i></span></span>
                             <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
                         </blockquote>
-                        <p class="author">John Doe, Founder <a href="#">FREEHTML5.co</a> <span class="subtext">Creative Director</span></p>
+                        <p class="author">John Doe, Founder <a href="">{{ config('app.name') }}</a> <span class="subtext">Creative Director</span></p>
                     </div>
 
                 </div>

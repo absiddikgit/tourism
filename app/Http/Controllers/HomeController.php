@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Customer\Customer;
+use App\Models\Admin\Package\Package;
+use App\Models\Admin\Place\Place;
+use App\Models\Booking\Booking;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home')
+                ->with('total_package', Package::count())
+                ->with('total_place', Place::count())
+                ->with('total_booking', Booking::count())
+                ->with('total_customer', Customer::count())
+                ->with('running_packages', Package::where('status',1)->get());
     }
 }

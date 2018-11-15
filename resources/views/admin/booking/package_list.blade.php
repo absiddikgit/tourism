@@ -20,7 +20,7 @@
                                     <th>Return Date</th>
                                     <th>Deadline Date</th>
                                     <th>Total Booking</th>
-                                    <th>Total travelers</th>
+                                    <th>Available Seat</th>
                                     <th>Total cost</th>
                                     <th>Action</th>
                                 </tr>
@@ -40,7 +40,7 @@
                                             <td>{{ $p->return_date }}</td>
                                             <td>{{ $p->booking_deadline }}</td>
                                             <td>{{ $p->booking->count() }}</td>
-                                            <td>{{ $p->booking->sum('num_of_travelers') }}</td>
+                                            <td>{{ $p->availableSeat() }}</td>
                                             <td>${{ $p->booking->sum('total_cost') }}</td>
                                             <td>
                                                 <a href="{!! route('booking.list',$p->id) !!}">Booking Details</a>

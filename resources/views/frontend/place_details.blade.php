@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
 @section('content')
-    <img style="width: 100%; height: 300px" src="{{ $place->placeImages->count()?$place->placeImages[0]->image:'' }}" alt="">
+    <img style="width: 100%; height: 430px" src="{!! asset('images/cover.jpg') !!}" alt="">
     <div style="margin-top:-260px" id="fh5co-features">
         <div class="container">
             <div class="row">

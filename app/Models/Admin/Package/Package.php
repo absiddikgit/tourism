@@ -10,7 +10,7 @@ class Package extends Model
 {
     const STATUS = [''=>'Choose','1'=>'Active','0'=>'Deactive'];
 
-    protected $fillable = ['title','slug','division_id','district_id','description','cost','departs_date','return_date','booking_deadline','status'];
+    protected $fillable = ['title','slug','division_id','district_id','description','total_seat','cost','departs_date','return_date','booking_deadline','status'];
 
     /**
      * Get the Division that owns the model.
@@ -87,5 +87,10 @@ class Package extends Model
     public function booking()
     {
         return $this->hasMany(Booking::class);
+    }
+
+    public function availableSeat()
+    {
+        return $this->total_seat - ($this->booking->sum('num_of_travelers')+$this->booking->sum('num_of_child'));
     }
 }

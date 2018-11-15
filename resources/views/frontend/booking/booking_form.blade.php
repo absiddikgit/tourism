@@ -48,6 +48,9 @@
                     <form style="padding:20px 5px" class="" action="{!! route('frontend.package.booking.confirm') !!}" method="get">
                         {{-- {{ csrf_field() }} --}}
                         <input type="hidden" name="package" value="{{ $package->slug }}">
+                        <div>
+                            <label for="">Available Seat :</label> {{ $package->availableSeat() }}
+                        </div>
                         <div class="form-group">
                             <label for="">Types:</label>
                             <div style="padding: 0px 50px">
@@ -56,8 +59,9 @@
                                         <input required v-model="picked" type="radio" name="type" value="{{ $type->slug }}"> {{ $type->type }}<br>
                                         @if ($type->slug == 'family')
                                             <div v-if="picked === 'family'" style="padding: 5px 0 0 50px">
-                                                <input v-model="total_travelers" class="s-input" type="number" name="num_of_travelers" value="" placeholder="Number of travelers" required min="3" step="1" max="100">
-                                                {{-- <input class="s-input" type="text" name="num_of_child" value="" placeholder="Number of total childs"> --}}
+                                                <input v-model="total_travelers" class="s-input" type="number" name="num_of_travelers" value="" placeholder="Number of travelers" required step="1" max="100">
+                                                <input v-model="num_of_child" class="s-input" type="number" name="num_of_child" value="" placeholder="Number of total childs">
+
                                             </div>
                                         @endif
                                     @endforeach

@@ -8,46 +8,47 @@
     <!-- Widgets -->
     <div class="row clearfix">
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box bg-pink hover-expand-effect">
+            <div class="info-box bg-light-green hover-expand-effect">
                 <div class="icon">
-                    <i class="material-icons">playlist_add_check</i>
+                    <i class="material-icons">place</i>
                 </div>
                 <div class="content">
-                    <div class="text">NEW TASKS</div>
-                    <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                    <div class="text">TOTAL PLACE</div>
+                    <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20">{{ $total_place }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-pink hover-expand-effect">
+                <div class="icon">
+                    {{-- <i class="material-icons">playlist_add_check</i> --}}
+                    <i class="material-icons">person</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL CUSTOMER</div>
+                    <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20">{{ $total_customer }}</div>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box bg-cyan hover-expand-effect">
                 <div class="icon">
-                    <i class="material-icons">help</i>
+                    <i class="material-icons">playlist_add_check</i>
                 </div>
                 <div class="content">
-                    <div class="text">NEW TICKETS</div>
-                    <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box bg-light-green hover-expand-effect">
-                <div class="icon">
-                    <i class="material-icons">forum</i>
-                </div>
-                <div class="content">
-                    <div class="text">NEW COMMENTS</div>
-                    <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
+                    <div class="text">TOTAL PACKAGE</div>
+                    <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20">{{ $total_package }}</div>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box bg-orange hover-expand-effect">
                 <div class="icon">
-                    <i class="material-icons">person_add</i>
+                    <i class="material-icons">event_available</i>
                 </div>
                 <div class="content">
-                    <div class="text">NEW VISITORS</div>
-                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
+                    <div class="text">TOTAL BOOKING</div>
+                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20">{{ $total_booking }}</div>
                 </div>
             </div>
         </div>
@@ -78,70 +79,32 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Task</th>
-                                    <th>Status</th>
-                                    <th>Manager</th>
+                                    <th>Package</th>
+                                    <th>Total Seat</th>
+                                    <th>Available Seat</th>
                                     <th>Progress</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Task A</td>
-                                    <td><span class="label bg-green">Doing</span></td>
-                                    <td>John Doe</td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" style="width: 62%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Task B</td>
-                                    <td><span class="label bg-blue">To Do</span></td>
-                                    <td>John Doe</td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Task C</td>
-                                    <td><span class="label bg-light-blue">On Hold</span></td>
-                                    <td>John Doe</td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-light-blue" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Task D</td>
-                                    <td><span class="label bg-orange">Wait Approvel</span></td>
-                                    <td>John Doe</td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Task E</td>
-                                    <td>
-                                        <span class="label bg-red">Suspended</span>
-                                    </td>
-                                    <td>John Doe</td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-red" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width: 87%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @php
+                                    $p=1
+                                @endphp
+                                @if ($running_packages->count())
+                                    @foreach ($running_packages as $package)
+                                        <tr>
+                                            <td>{{ $p++ }}</td>
+                                            <td>{{ $package->title}}</td>
+                                            <td>{{ $package->total_seat }}</td>
+                                            <td>{{ $package->availableSeat() }}</td>
+                                            <td>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="{{ $package->total_seat - $package->availableSeat() }}" aria-valuemin="0" aria-valuemax="{{ $package->total_seat }}" style="width: {{ (($package->total_seat - $package->availableSeat())*100)/$package->total_seat }}%"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+
                             </tbody>
                         </table>
                     </div>

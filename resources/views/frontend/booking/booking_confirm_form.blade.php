@@ -55,8 +55,11 @@
 
                         <input type="hidden" name="package" value="{{ $package->id }}">
                         <input type="hidden" name="type" value="{{ $c_type->slug }}">
-                        @if ($qty>2)
+                        @if ($qty)
                             <input type="hidden" name="num_of_travelers" value="{{ $qty }}">
+                        @endif
+                        @if ($num_of_child)
+                            <input type="hidden" name="num_of_child" value="{{ $num_of_child }}">
                         @endif
 
 
@@ -83,6 +86,9 @@
                             <h4 style="margin:0; padding-bottom:10px">Booking Details</h4>
                             <p>Type: {{ $c_type->type }}</p>
                             <p>Travelers: {{ $qty }}</p>
+                            @if ($num_of_child)
+                                <p>Number of Childs: {{ $num_of_child }}</p>
+                            @endif
                             <p>Total Cost: ${{ $total_cost }}</p>
                         </div>
 

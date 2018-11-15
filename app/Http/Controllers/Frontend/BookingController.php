@@ -10,7 +10,7 @@ use App\Models\Customer\Customer;
 use App\Models\Admin\Package\Type;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Package\Package;
-use Srmklive\PayPal\Services\ExpressCheckout;
+use Srmklive\PayPal\Services\AdaptivePayments;
 
 class BookingController extends Controller
 {
@@ -39,12 +39,24 @@ class BookingController extends Controller
             $qty = $this->qty($request->type);
         }
 
-        $total_cost = $package->cost*$qty;
+        if ($package->availableSeat() < ($qty + $request->num_of_child)) {
+            Session::flash('info','Apologise! Available seat is '.$package->availableSeat());
+            return redirect()->back();
+        }
+
+        $total_cost = 0;
+
+        if ($request->num_of_child) {
+            $total_cost = ($package->cost*$qty) + ($package->cost/2*$request->num_of_child);
+        }else {
+            $total_cost = $package->cost*$qty;
+        }
 
         return view('frontend.booking.booking_confirm_form')
         ->withUser(Customer::find(Auth::guard('customer')->user()->id))
         ->with('c_type', $type)
         ->with('qty', $qty)
+        ->with('num_of_child', $request->num_of_child)
         ->with('package', $package)
         ->with('total_cost', $total_cost);
     }
@@ -60,52 +72,69 @@ class BookingController extends Controller
 
     public function payWithPaypal(Request $r)
     {
+        // My data
         $qty = '';
+        $package = Package::find($r->package);
+
         if ($r->num_of_travelers) {
             $qty = $r->num_of_travelers;
         }else {
             $qty = $this->qty($r->type);
         }
 
-        $provider = new ExpressCheckout;
+        $total_cost = 0;
 
-        $package = Package::find($r->package);
+        if ($r->num_of_child) {
+            $total_cost = ($package->cost*$qty) + ($package->cost/2*$r->num_of_child);
+        }else {
+            $total_cost = $package->cost*$qty;
+        }
 
         $details = [
             'package' => $r->package,
             'contact_number' => $r->contact_number,
             'type' => $r->type,
             'qty' => $qty,
+            'num_of_child' => $r->num_of_child,
+            'total_cost' => $total_cost,
         ];
 
+        // Paypal
+
+        $provider = new AdaptivePayments;
         $data = [];
-        $data['items'] = [
-            [
-                'name' => $package->title,
-                'price' => $package->cost,
-                'qty' => $qty,
+        $data = [
+            'receivers'  => [
+                [
+                    'email' => 'bdtravels123@gmail.com',
+                    'amount' => $total_cost,
+                    'primary' => true,
+                ],
+                [
+                    'email' => 'janedoe@example.com',
+                    'amount' => $total_cost,
+                    'primary' => false
+                ]
             ]
         ];
 
         $data['invoice_id'] = uniqid();
         $data['invoice_description'] = "this is test";
+        $data['payer'] = "EACHRECEIVER";
         $data['return_url'] = route('frontend.booking.payment.store',$details);
         $data['cancel_url'] = route('frontend.package.booking',$package->slug);
+        $data['total'] = $total_cost;
+        $response = $provider->createPayRequest($data);
 
-        $data['total'] = $package->cost*$qty;
+        $details['payKey'] = $response['payKey'];
 
-        $response = $provider->setExpressCheckout($data);
-
-        // This will redirect user to PayPal
-        return redirect($response['paypal_link']);
+        $redirect_url = $provider->getRedirectUrl('approved', $response['payKey']);
+        return redirect($redirect_url);
     }
 
     public function paymentComplete(Request $request)
     {
         $type = Type::where('slug',$request->type)->first();
-
-        $provider = new ExpressCheckout;
-        $response = $provider->getExpressCheckoutDetails($request->token);
 
         $booking = new Booking();
 
@@ -117,15 +146,11 @@ class BookingController extends Controller
 
         $booking->num_of_travelers = $request->qty;
 
+        $booking->num_of_child = $request->num_of_child;
+
         $booking->contact_number = $request->contact_number;
 
-        $booking->invoice_id = $response['INVNUM'];
-
-        $booking->total_cost = $response['AMT'];
-
-        $booking->payer_id = $request->PayerID;
-
-        $booking->token = $request->token;
+        $booking->total_cost = $request->total_cost;
 
         if ($booking->save()) {
             Session::flash('success','Booking has been completed successfully');

@@ -124,6 +124,15 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="col-sm-3 control-label">Total Seat</label>
+                                    <div class="col-md-6">
+                                        <div class="form-line">
+                                            <input class="form-control" required type="number" name="total_seat" value="{{ old('total_seat') }}" placeholder="Total Seat">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="col-sm-3 control-label">Per Head Cost</label>
                                     <div class="col-md-6">
                                         <div class="form-line">

@@ -26,11 +26,10 @@ class CreateBookingsTable extends Migration
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
 
             $table->integer('num_of_travelers')->unsigned();
+            $table->integer('num_of_child')->unsigned()->nullable();
+
             $table->string('contact_number');
-            $table->string('invoice_id');
             $table->string('total_cost');
-            $table->string('payer_id');
-            $table->string('token');
 
             $table->timestamps();
         });

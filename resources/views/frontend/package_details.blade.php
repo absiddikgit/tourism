@@ -1,9 +1,7 @@
 @extends('layouts.frontend')
 
 @section('content')
-<img style="width: 100%; height: 300px" src="{{
-    ($package->places->count() && $package->places[0]->placeImages->count()) ?
-    $package->places[0]->placeImages[0]->image : '' }}" alt="">
+<img style="width: 100%; height: 430px" src="{!! asset('images/cover.jpg') !!}" alt="">
 
 <div style="margin-top:-300px" id="fh5co-blog-section" class="fh5co-section-gray">
     <div style="padding-top:35px">
@@ -37,7 +35,7 @@
                                 <span>{{ $type->type }}</span> {{ --$i?'|':'' }}
                             @endforeach
                         @endif
-                        @if ($package->status)
+                        @if ($package->status && $package->availableSeat())
                             <br><br> <a class="btn btn-primary btn-outline" href="{!! route('frontend.package.booking',$package->slug) !!}">Book Now <i class="icon-arrow-right22"></i></a>
                         @endif
                     </div>

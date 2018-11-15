@@ -58,6 +58,11 @@
                                                                     <td width="84%">{{ $package->num_of_travelers }}</td>
                                                                 </tr>
                                                                 <tr>
+                                                                    <td width="25%">Number of Child</td>
+                                                                    <td width="1%">:</td>
+                                                                    <td width="84%">{{ $package->num_of_child }}</td>
+                                                                </tr>
+                                                                <tr>
                                                                     <td width="25%">Total Cost</td>
                                                                     <td width="1%">:</td>
                                                                     <td width="84%">${{ $package->total_cost }}</td>

@@ -26,12 +26,14 @@ new Vue({
     data: {
         picked: "",
         total_travelers: "",
+        num_of_child: "",
         cost: document.getElementById('cost').value,
         show_more_input: false,
     },
     methods: {
         total_amount: function () {
-            return this.cost * this.total_travelers;
+
+            return (this.cost * this.total_travelers)+(this.cost/2 * this.num_of_child);
         }
     }
 });
