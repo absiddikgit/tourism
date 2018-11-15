@@ -175,7 +175,7 @@
 										<ul>
 											@if ($top_5_hotels)
 												@foreach ($top_5_hotels as $hotel)
-													<li><a href="#">{{ $hotel->name }}</a></li>
+													<li><a href="{!! route('frontend.hotel.details',$hotel->slug) !!}">{{ $hotel->name }}</a></li>
 												@endforeach
 											@endif
 										</ul>
@@ -185,7 +185,7 @@
 										<ul>
 											@if ($top_5_places)
 												@foreach ($top_5_places as $place)
-													<li><a href="#">{{ $place->title }}</a></li>
+													<li><a href="{!! route('frontend.place.details',$place->slug) !!}">{{ $place->title }}</a></li>
 												@endforeach
 											@endif
 										</ul>

@@ -28,8 +28,8 @@ class AppServiceProvider extends ServiceProvider
         //
         View::share('package_types', Type::orderBy('type')->get());
         View::share('divisions', Division::orderBy('name')->get());
-        View::share('top_5_places', Place::select('title')->latest()->take(5)->get());
-        View::share('top_5_hotels', Hotel::select('name')->latest()->take(5)->get());
+        View::share('top_5_places', Place::select('title','slug')->latest()->take(5)->get());
+        View::share('top_5_hotels', Hotel::select('name','slug')->latest()->take(5)->get());
     }
 
     /**
