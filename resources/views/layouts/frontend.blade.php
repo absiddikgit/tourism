@@ -39,7 +39,7 @@
 	<meta name="twitter:card" content="" />
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="shortcut icon" href="{!! asset('admin/logo.png') !!}">
 
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="{!! asset('fontawesome/css/all.css') !!}">
@@ -104,7 +104,7 @@
 					<div class="container">
 						<div class="nav-header">
 							<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-							<h1 id="fh5co-logo"><a href="{!! route('frontend.home') !!}"><i class="icon-airplane"></i>{{ config('app.name') }}</a></h1>
+							<h1 id="fh5co-logo"><a href="{!! route('frontend.home') !!}"><i class="fa fa-bus-alt"></i>{{ config('app.name') }}</a></h1>
 							<!-- START #fh5co-menu-wrap -->
 							<nav id="fh5co-menu-wrap" role="navigation">
 								<ul class="sf-menu" id="fh5co-primary-menu">

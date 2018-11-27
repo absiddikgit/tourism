@@ -183,6 +183,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
 
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -238,6 +239,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
 
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

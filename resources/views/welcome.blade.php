@@ -85,8 +85,11 @@
                             </div>
                         </div>
                         <div class="desc2 animate-box">
-                            <div class="col-sm-7 col-sm-push-1 col-md-7 col-md-push-1">
+                            <div class="col-sm-7 col-sm-push-1 col-md-7 col-md-push-1 text-center">
                                 <h2>WelCome To {{ config('app.name') }}</h2>
+                                <h4 style="color:white;padding:10px 0">{{ $quotes[rand(0,4)] }}</h4>
+
+                                <a style="color:white;border-color:white!important" class="btn btn-primary btn-outline btn-lg" href="{!! route('frontend.packages') !!}">Book Now <i class="icon-arrow-right22"></i></a>
                             </div>
                         </div>
                     </div>
@@ -308,13 +311,17 @@
             <div class="row row-bottom-padded-md">
                 @if ($top_3_places->count())
                     @foreach ($top_3_places as $place)
-                        <div class="col-lg-4 col-md-4 col-sm-6">
-                            <div class="fh5co-blog animate-box">
-                                <a href="#"><img class="img-responsive" src="{{ $place->placeImages[0]->image }}" alt=""></a>
-                                <div class="blog-text">
+                        <div style="margin-bottom:10px" class="col-md-4">
+                            <div class="img-thumbnail" style="padding:0;">
+                                <img width="300px" src="{{ $place->placeImages?$place->placeImages[0]->image:'' }}" alt="" class="img-responsive">
+                                <div style="margin:0 0 15px 0;padding:4px; background:#F78536;color:white" class="col-md-12">
+                                    <div class="col-md-12">
+                                        <h3 style="margin: 0;color:white;padding: 15px 0">{{ $place->title }}</h3>
+                                    </div>
+                                </div>
+                                <div style="padding:10px">
                                     <div class="prod-title">
-                                        <h3><a href="#">{{ $place->title }}</a></h3>
-                                        <P class="">{{ $place->district->name.', '.$place->division->name }}</P>
+                                        <P><i class="fa fa-map-marker-alt"></i> <b>{{ $place->district->name.', '.$place->division->name }}</b> </P>
                                         <p>{!! str_limit($place->description,150) !!}</p>
                                         <p><a href="{!! route('frontend.place.details',$place->slug) !!}">Learn More...</a></p>
                                     </div>

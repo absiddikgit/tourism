@@ -59,7 +59,7 @@
                                         <input required v-model="picked" type="radio" name="type" value="{{ $type->slug }}"> {{ $type->type }}<br>
                                         @if ($type->slug == 'family')
                                             <div v-if="picked === 'family'" style="padding: 5px 0 0 50px">
-                                                <input v-model="total_travelers" class="s-input" type="number" name="num_of_travelers" value="" placeholder="Number of travelers" required step="1" max="100">
+                                                <input v-model="total_travelers" class="s-input" type="number" name="num_of_travelers" value="" placeholder="Number of adult travelers" required step="1" max="100">
                                                 <input v-model="num_of_child" class="s-input" type="number" name="num_of_child" value="" placeholder="Number of total childs">
 
                                             </div>

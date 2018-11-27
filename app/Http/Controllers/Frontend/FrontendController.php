@@ -14,9 +14,17 @@ class FrontendController extends Controller
 {
     public function index()
     {
+        $quotes = [
+            '“Traveling – it leaves you speechless, then turns you into a storyteller.” ',
+            'Better to see something once than hear about it a thousand times ',
+            'Dare to live the life you’ve always wanted  ',
+            '“Traveling 4 – it leaves you speechless, then turns you into a storyteller.” ',
+            '“Traveling 5 – it leaves you speechless, then turns you into a storyteller.” ',
+        ];
         return view('welcome')
         // ->with('package_types', Type::orderBy('type')->get())
         // ->with('divisions', Division::orderBy('name')->get())
+        ->with('quotes', $quotes)
         ->with('top_3_packages', Package::where('status',1)->orderBy('created_at','desc')->take(3)->get())
         ->with('top_3_places', Place::orderBy('created_at','desc')->take(3)->get());
     }

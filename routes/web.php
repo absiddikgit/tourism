@@ -76,6 +76,12 @@ Route::group(['middleware'=>'auth:customer'], function() {
     Route::get('booking','Frontend\BookingController@bookingConfirm')->name('frontend.package.booking.confirm');
     Route::post('booking-pay/paypal','Frontend\BookingController@payWithPaypal')->name('frontend.booking.pay-with-paypal');
     Route::get('booking-payment','Frontend\BookingController@paymentComplete')->name('frontend.booking.payment.store');
+
+    // Booking Package Details
+
+    Route::get('booking/{payment_id}/details', 'Customer\Booking\PackageDetailsController@show')->name('booking.package.show');
+    Route::get('booking/{payment_id}/details/pdf', 'Customer\Booking\PackageDetailsController@pdf')->name('booking.package.pdf');
+
 });
 
 

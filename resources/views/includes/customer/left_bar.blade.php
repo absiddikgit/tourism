@@ -10,13 +10,13 @@
     </ul> --}}
     <div style="padding: 20px 20px; line-height: 8px">
         <p>
-            <a href="{!! route('customer.dashboard') !!}"> <b>Dashboard</b> </a>
+            <a href="{!! route('customer.dashboard') !!}"> <b> <i class="icon-dashboard"></i> Dashboard</b> </a>
         </p>
         <p>
-            <a href="{!! route('customer.profile') !!}"> <b>Profile</b> </a>
+            <a href="{!! route('customer.profile') !!}"> <b> <i class="fa fa-user"></i> Profile</b> </a>
         </p>
         <p>
-            <a href="{!! route('customer.change-password') !!}"> <b>Change Password</b> </a>
+            <a href="{!! route('customer.change-password') !!}"> <b> <i class="fa fa-pen"></i> Change Password</b> </a>
         </p>
     </div>
 </div>

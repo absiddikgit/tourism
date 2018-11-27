@@ -126,10 +126,15 @@ class BookingController extends Controller
         $data['total'] = $total_cost;
         $response = $provider->createPayRequest($data);
 
-        $details['payKey'] = $response['payKey'];
+        try {
+            $redirect_url = $provider->getRedirectUrl('approved', $response['payKey']);
+            return redirect($redirect_url);
+        } catch (\Exception $e) {
+            return back()->with('info','Apologize!!! Booking is failed. Please check your connection');
+        }
 
-        $redirect_url = $provider->getRedirectUrl('approved', $response['payKey']);
-        return redirect($redirect_url);
+
+
     }
 
     public function paymentComplete(Request $request)
@@ -152,11 +157,13 @@ class BookingController extends Controller
 
         $booking->total_cost = $request->total_cost;
 
+        $booking->payment_id = str_random(9).rand(100,999);
+
         if ($booking->save()) {
             Session::flash('success','Booking has been completed successfully');
         }
 
-        return redirect()->route('customer.dashboard');
+        return redirect()->route('booking.package.show',$booking->payment_id);
 
     }
 }

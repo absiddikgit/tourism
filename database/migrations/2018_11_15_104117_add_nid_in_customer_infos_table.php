@@ -26,7 +26,7 @@ class AddNidInCustomerInfosTable extends Migration
     public function down()
     {
         Schema::table('customer_infos', function (Blueprint $table) {
-            //
+            $table->dropColumn('NID');
         });
     }
 }

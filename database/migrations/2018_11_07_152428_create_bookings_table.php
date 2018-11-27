@@ -30,6 +30,7 @@ class CreateBookingsTable extends Migration
 
             $table->string('contact_number');
             $table->string('total_cost');
+            $table->string('payment_id');
 
             $table->timestamps();
         });

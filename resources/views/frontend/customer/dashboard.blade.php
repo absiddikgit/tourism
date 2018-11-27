@@ -33,7 +33,8 @@
                                                     <td><a href="{!! route('frontend.package.details',$package->package->slug) !!}">{{ $package->package->title }}</a></td>
                                                     <td>${{ $package->total_cost }}</td>
                                                     <td>
-                                                        <a style="text-transform: none;" data-toggle="collapse" data-parent="#accordion" href="#{{$package->id}}"><i class="fa fa-eye"></i> View</a>
+                                                        <a style="text-transform: none;" data-toggle="collapse" data-parent="#accordion" href="#{{$package->id}}"><i class="fa fa-eye"></i> View</a> |
+                                                        <a style="text-transform: none;" href="{!! route('booking.package.show', $package->payment_id) !!}"><i class="fa fa-info"></i> Details</a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -57,11 +58,13 @@
                                                                     <td width="1%">:</td>
                                                                     <td width="84%">{{ $package->num_of_travelers }}</td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td width="25%">Number of Child</td>
-                                                                    <td width="1%">:</td>
-                                                                    <td width="84%">{{ $package->num_of_child }}</td>
-                                                                </tr>
+                                                                @if ($package->num_of_child)
+                                                                    <tr>
+                                                                        <td width="25%">Number of Child</td>
+                                                                        <td width="1%">:</td>
+                                                                        <td width="84%">{{ $package->num_of_child }}</td>
+                                                                    </tr>
+                                                                @endif
                                                                 <tr>
                                                                     <td width="25%">Total Cost</td>
                                                                     <td width="1%">:</td>
